@@ -1,4 +1,5 @@
 ﻿import * as Tone from 'tone';
+import hitMap from "./hitMap.tsx";
 
 interface Hit {
     time: number; // Time in seconds
@@ -14,7 +15,15 @@ export const createHitMap = (bpm: number, sound: Tone.Player, songTime: number) 
         const time = i * timeBetweenHits;
         hitMap.push({ time, sound: sound });
     }
-    console.log(hitMap);
     return hitMap;
+};
+
+export const loadMap = (hitSound: Tone.Player) => {
+    const newHitMap: Hit[] = hitMap.map((hit) => ({
+        time: hit.time,
+        sound: hitSound
+    }));
+
+    return newHitMap;
 };
 

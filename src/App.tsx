@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import * as Tone from 'tone';
-import KeyHandler, {scheduleHits} from "./KeyHandler.tsx";
-import {createHitMap} from "./hitMapper.tsx";
+import KeyHandler from "./KeyHandler.tsx";
+import {loadMap} from "./hitMapper.tsx";
 import {getTransport} from "tone";
 
 interface Hit {
@@ -17,7 +17,7 @@ function App() {
         const audio = new Tone.Player("public\\assets\\peak.mp3").toDestination();
         audioRef.current = audio;
         const hitSound = new Tone.Player("public\\assets\\snare.mp3").toDestination();
-        const newHitMap = createHitMap(75, hitSound, 110);
+        const newHitMap = loadMap(hitSound);
         setHitMap(newHitMap);
         audio.autostart = false;
     }, []);
