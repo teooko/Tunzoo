@@ -27,15 +27,15 @@ function App() {
 
         Tone.loaded().then(() => {
             const transport = Tone.getTransport(); 
-            audioRef.current?.start(); 
+            //audioRef.current?.start(); 
 
             newHitMap.forEach((hit) => {
                 transport.scheduleOnce(() => {
                     setVisibleHits(prevKeys => [...prevKeys, hit.time]);
                     setTimeout(() => {
-                        setVisibleHits(currentKeys => currentKeys.slice(1));
-                    }, 500);
-                }, hit.time + 0.5);
+                        //setVisibleHits(currentKeys => currentKeys.slice(1));
+                    }, 1000);
+                }, hit.time - 1);
             });
             transport.start();
         });
@@ -47,7 +47,7 @@ function App() {
       <div>
           <button onClick={() => startSong()}>start</button>
           <div style={{marginLeft: "auto", marginRight: "auto", height: "100px", width: "3px",borderStyle: "solid", position: "absolute"}}></div>
-          <div>
+          <div style={{display: "flex", flexDirection: "row"}}>
               {
                   visibleHits.map((hit, index) =>
                       <motion.div
@@ -55,9 +55,9 @@ function App() {
                           className="falling-key"
                           initial={{ x: 1000 }} // Start position
                           animate={{ x: 0 }} // End position
-                          transition={{ duration: 0.5 }}
+                          transition={{ duration: 1 }}
                       >
-                          <div style={{fontSize: 30, border: "1px solid black", borderRadius: "100px", padding: "10px", width: "30px"}}>
+                          <div style={{fontSize: 30, border: "1px solid black", borderRadius: "100px", padding: "10px", width: "30px", position: "absolute"}}>
                               k
                           </div>
                       </motion.div>)

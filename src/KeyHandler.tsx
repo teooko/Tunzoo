@@ -14,7 +14,7 @@ const KeyHandler = (hitMap: Hit[]) => {
         if (event.key === 'k') {
             // Check if the timing is correct
             const now = Tone.now(); // Get current time in Tone.js
-            const hit = hitMap.find(hit => Math.abs(now - hit.time) < 0.2);
+            const hit = hitMap.find(hit => Math.abs(now - hit.time) < 0.1);
             const transport = Tone.getTransport();
             console.log(transport.now());
             if (hit) { // 100ms window
