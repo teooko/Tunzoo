@@ -23,7 +23,7 @@ export const loadMap = (hitSound: Tone.Player) => {
         time: hit.time,
         sound: hitSound
     }));
-
+    
     return newHitMap;
 };
 

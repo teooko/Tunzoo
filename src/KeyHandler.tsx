@@ -15,7 +15,8 @@ const KeyHandler = (hitMap: Hit[]) => {
             // Check if the timing is correct
             const now = Tone.now(); // Get current time in Tone.js
             const hit = hitMap.find(hit => Math.abs(now - hit.time) < 0.2);
-            console.log(Tone.now(), hit, hitMap);
+            const transport = Tone.getTransport();
+            console.log(transport.now());
             if (hit) { // 100ms window
                 scheduleSound(hit.time, hit.sound); // Play hit feedback
                 // Update score based on timing (e.g., perfect, good, miss)

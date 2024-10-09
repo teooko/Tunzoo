@@ -17,33 +17,32 @@ function App() {
 
     KeyHandler(hitMap);
     const startSong = () => {
-        const audio = new Tone.Player("public\\assets\\peak.mp3").toDestination();
+        const audio = new Tone.Player("public/assets/peak.mp3").toDestination(); 
         audioRef.current = audio;
-        const hitSound = new Tone.Player("public\\assets\\snare.mp3").toDestination();
-        const newHitMap = loadMap(hitSound);
+
+        const hitSound = new Tone.Player("public/assets/snare.mp3").toDestination();
+        const newHitMap = loadMap(hitSound); 
+
         setHitMap(newHitMap);
+
         Tone.loaded().then(() => {
-            const transport = getTransport();
+            const transport = Tone.getTransport(); 
             audioRef.current?.start(); 
-            transport.start();
-            const now = Tone.now();
-            hitMap.forEach(hit => {
-                const timeToFall = (hit.time - now) * 1000; // Convert to milliseconds
-                setVisibleHits(prevKeys => [...prevKeys, hit.time]);
-                
-                if (timeToFall > 0) {
+
+            newHitMap.forEach((hit) => {
+                transport.scheduleOnce(() => {
+                    setVisibleHits(prevKeys => [...prevKeys, hit.time]);
                     setTimeout(() => {
-                        setVisibleHits(prevKeys => [...prevKeys, hit.time]);
                         setVisibleHits(currentKeys => currentKeys.slice(1));
-                    }, timeToFall);
-                    
-                    
-                }
+                    }, 500);
+                }, hit.time + 0.5);
             });
+            transport.start();
         });
     };
-    
-  return (
+
+
+    return (
     <>
       <div>
           <button onClick={() => startSong()}>start</button>
@@ -56,9 +55,11 @@ function App() {
                           className="falling-key"
                           initial={{ x: 1000 }} // Start position
                           animate={{ x: 0 }} // End position
-                          transition={{ duration: 1 }}
+                          transition={{ duration: 0.5 }}
                       >
-                          k
+                          <div style={{fontSize: 30, border: "1px solid black", borderRadius: "100px", padding: "10px", width: "30px"}}>
+                              k
+                          </div>
                       </motion.div>)
               }
           </div>
