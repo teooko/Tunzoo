@@ -8,14 +8,6 @@ interface Hit {
 function scheduleSound(time: number, sound: Tone.Player) {
     sound.start(time);
 }
-export function scheduleHits(hitMap: Hit[]) {
-    hitMap.forEach(({ time, sound }) => {
-        const transport = Tone.getTransport();
-        transport.schedule((time) => {
-            scheduleSound(time, sound); // Assuming you have the scheduleNote function
-        }, time); // Use the time from hitMap
-    });
-}
 const KeyHandler = (hitMap: Hit[]) => {
     const handleKeyDown = (event: KeyboardEvent) => {
         console.log(`Key pressed: ${event.key}`);
@@ -32,7 +24,6 @@ const KeyHandler = (hitMap: Hit[]) => {
     };
 
     useEffect(() => {
-        // Attach the keydown event listener
         window.addEventListener('keydown', handleKeyDown);
         
         // Cleanup the event listener on component unmount
