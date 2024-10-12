@@ -16,12 +16,12 @@ const KeyHandler = (hitMap: Hit[]) => {
             const now = Tone.now(); // Get current time in Tone.js
             const hit = hitMap.find(hit => Math.abs(now - hit.time) < 0.1);
             const transport = Tone.getTransport();
-            console.log(transport.now());
             if (hit) { // 100ms window
                 scheduleSound(hit.time, hit.sound); // Play hit feedback
                 // Update score based on timing (e.g., perfect, good, miss)
             }
         }
+        
     };
 
     useEffect(() => {
