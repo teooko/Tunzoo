@@ -10,7 +10,6 @@ function scheduleSound(time: number, sound: Tone.Player) {
 }
 const KeyHandler = (hitMap: Hit[]) => {
     const handleKeyDown = (event: KeyboardEvent) => {
-        console.log(`Key pressed: ${event.key}`);
         if (event.key === 'k') {
             // Check if the timing is correct
             const now = Tone.now(); // Get current time in Tone.js
