@@ -6,6 +6,7 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import {TextureLoader} from "three";
+import {motion} from "framer-motion";
 
 function App() {
     const GltfModel = ({ glbUrl }) => {
@@ -40,8 +41,8 @@ function App() {
         const texture = useLoader(TextureLoader, 'public/assets/texture.png'); // Use the PNG version of your SVG
         
         return (
-            <mesh position={[0, 0, -5]}>
-                <planeGeometry args={[20, 12]} /> {/* Width and Height of the Plane */}
+            <mesh position={[0, 0, -10]}>
+                <planeGeometry args={[40, 24]} /> {/* Width and Height of the Plane */}
                 <meshStandardMaterial map={texture} color="lightblue" transparent={true} opacity={0.1}/>
             </mesh>
         );
@@ -52,7 +53,17 @@ function App() {
             <div style={{position: "absolute", height: "80px", backgroundColor: "black", zIndex: 2}}>
 
             </div>
-            <div style={{height: "100vh", width: "100vw", backgroundColor: "pink" }}>
+                <motion.div
+                    initial={{ backgroundColor: '#66CD79' }} 
+                    animate={{ backgroundColor: '#03CEA4' }} 
+                    transition={{
+                        duration: 5, 
+                        ease: 'linear', 
+                        repeat: Infinity, 
+                        repeatType: 'mirror', 
+                    }}
+                    style={{height: "100vh", width: "100vw" }}
+                >
                 
                 <Canvas>
                     {/* Camera Controls */}
@@ -67,7 +78,7 @@ function App() {
                     <GltfModel glbUrl="public/assets/GLTF/Inkfish_LOD1.glb" />
                     <Plane />
                 </Canvas>
-            </div>
+                </motion.div>
         </>
     );
 }
