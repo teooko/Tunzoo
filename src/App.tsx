@@ -41,9 +41,9 @@ function App() {
         const texture = useLoader(TextureLoader, 'public/assets/texture.png'); // Use the PNG version of your SVG
         
         return (
-            <mesh position={[0, 0, -10]}>
-                <planeGeometry args={[40, 24]} /> {/* Width and Height of the Plane */}
-                <meshStandardMaterial map={texture} color="lightblue" transparent={true} opacity={0.1}/>
+            <mesh position={[0, 5, -10]}>
+                <planeGeometry args={[40, 20]} /> {/* Width and Height of the Plane */}
+                <meshStandardMaterial map={texture} color="#00D9FF" transparent={true} />
             </mesh>
         );
     };
@@ -57,7 +57,7 @@ function App() {
                     initial={{ backgroundColor: '#66CD79' }} 
                     animate={{ backgroundColor: '#03CEA4' }} 
                     transition={{
-                        duration: 5, 
+                        duration: 3, 
                         ease: 'linear', 
                         repeat: Infinity, 
                         repeatType: 'mirror', 
@@ -70,7 +70,7 @@ function App() {
                     <OrbitControls />
 
                     {/* Lighting */}
-                    <ambientLight intensity={5} /> {/* Soft overall light */}
+                    <ambientLight intensity={10} color={'#66CD79'} /> {/* Soft overall light */}
                     <directionalLight position={[0, 10, 5]} intensity={1} /> {/* Strong directional light */}
                     <pointLight position={[5, 5, 5]} intensity={1} decay={2} distance={10} /> {/* Point light for localized illumination */}
                     <spotLight position={[0, 10, 0]} angle={0.3} penumbra={0.5} intensity={1} /> {/* Spot light for focused beam */}
