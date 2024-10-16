@@ -1,10 +1,11 @@
-import { Canvas } from "@react-three/fiber";
+import {Canvas, useLoader} from "@react-three/fiber";
 import { OrbitControls, Box } from "@react-three/drei";
 import './App.css';
 import { useEffect, useRef } from "react";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
+import {TextureLoader} from "three";
 
 function App() {
     const GltfModel = ({ glbUrl }) => {
@@ -36,12 +37,12 @@ function App() {
     };
 
     const Plane = () => {
+        const texture = useLoader(TextureLoader, 'public/assets/texture.png'); // Use the PNG version of your SVG
+        
         return (
-            <mesh>
-                <planeGeometry args={[5, 5]} /> {/* Width and Height of the Plane */}
-                <meshStandardMaterial color="lightblue">
-                    hi
-                </meshStandardMaterial>
+            <mesh position={[0, 0, -5]}>
+                <planeGeometry args={[20, 12]} /> {/* Width and Height of the Plane */}
+                <meshStandardMaterial map={texture} color="lightblue" transparent={true} opacity={0.1}/>
             </mesh>
         );
     };
