@@ -32,66 +32,71 @@ function App() {
             };
         }, [glbUrl]);
 
-        return <group ref={modelRef} position={[-2, -1, 2]} rotation={[0, Math.PI * 0.3, 0]}/>;
+        return <group ref={modelRef} position={[-1.6, -1, 3]} rotation={[0, Math.PI * 0.3, 0]}/>;
     };
 
     const Plane = () => {
         const texture = useLoader(TextureLoader, 'public/assets/texture.png'); // Use the PNG version of your SVG
         
         return (
-            <mesh position={[0, 0, -10]}>
-                <planeGeometry args={[40, 20]} /> {/* Width and Height of the Plane */}
+            <mesh position={[0, 0, -5]}>
+                <planeGeometry args={[30, 15]} /> {/* Width and Height of the Plane */}
                 <meshStandardMaterial map={texture} color="#00D9FF" transparent={true} opacity={0.3}/>
             </mesh>
         );
     };
     const Fern = () => {
-        const texture = useLoader(TextureLoader, 'public/assets/fern.png'); // Use the PNG version of your SVG
+        const texture = useLoader(TextureLoader, 'public/assets/shapes.png'); // Use the PNG version of your SVG
 
         return (
-            <mesh position={[-3,-1.8, 2]}>
-                <planeGeometry args={[2, 1]} /> {/* Width and Height of the Plane */}
-                <meshStandardMaterial map={texture} color="#00D9FF" transparent={true} />
+            <mesh position={[-4, -0.5, 0]}>
+                <planeGeometry args={[6, 12]} /> {/* Width and Height of the Plane */}
+                <meshStandardMaterial map={texture} transparent={true} opacity={0.5}/>
             </mesh>
         );
     };
     return (
         <>
-            
-                <motion.div
-                    initial={{ backgroundColor: '#66CD79' }} 
-                    animate={{ backgroundColor: '#03CEA4' }} 
-                    transition={{
-                        duration: 3, 
-                        ease: 'linear', 
-                        repeat: Infinity, 
-                        repeatType: 'mirror', 
-                    }}
-                    style={{height: "100vh", width: "100vw" }}
-                >
-                    <div style={{height: "6%", backgroundColor: "black", zIndex: 2}} />
+
+            <motion.div
+                initial={{ backgroundColor: '#66CD79' }}
+                animate={{ backgroundColor: '#03CEA4' }}
+                transition={{
+                    duration: 3,
+                    ease: 'linear',
+                    repeat: Infinity,
+                    repeatType: 'mirror',
+                }}
+                style={{ height: "100vh", width: "100vw", position: 'relative' }} // Set position relative
+            >
+                {/* Black div that overlays the canvas */}
+                <div style={{
+                    width: "50%",
+                    height: "100%",
+                    backgroundColor: "black",
+                    position: "absolute", // Position absolute to overlay
+                    top: 0, // Align to the top
+                    right: 0, // Stretch to the right
+                    zIndex: 2,
+                    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 30% 100%)'
+                }} />
+
                 <Canvas style={{
-                    height: "94%"
+                    height: "94%",
+                    position: 'relative', // Set position to relative
+                    zIndex: 1 // Canvas behind the black div
                 }}>
                     {/* Camera Controls */}
                     <OrbitControls />
 
                     {/* Lighting */}
-                    <ambientLight intensity={5} color={'#66CD79'} /> {/* Soft overall light */}
-                    <directionalLight position={[0, 10, 5]} intensity={1} /> {/* Strong directional light */}
-                    <pointLight position={[5, 5, 5]} intensity={1} decay={2} distance={10} /> {/* Point light for localized illumination */}
-                    <spotLight position={[0, 10, 0]} angle={0.3} penumbra={0.5} intensity={1} /> {/* Spot light for focused beam */}
-                    
+                    <ambientLight intensity={5} color={'white'} /> {/* Soft overall light */}
+
                     <GltfModel glbUrl="public/assets/GLTF/Inkfish_LOD1.glb" />
                     <Plane />
                     <Fern />
-                    <Dodecahedron position={[5, 5, -5]}>
-                        <meshStandardMaterial color="white" metalness={0.2} /> 
-                    </Dodecahedron>
-                    <Ring position={[3, 4, -3]}/>
-                    
                 </Canvas>
-                </motion.div>
+            </motion.div>
         </>
     );
 }
