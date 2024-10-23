@@ -6,22 +6,10 @@ import { useEffect, useRef } from "react";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import {Mesh, TextureLoader} from "three";
 import {motion} from "framer-motion";
+import Model from "./Model.tsx";
 
 const Menu = () => {
-    const Model : React.FC<{
-        fileUrl: string;
-        position: [number, number, number];
-        rotation: [number, number, number];
-    }> = ({ fileUrl, position, rotation }) => {
-        const mesh = useRef<Mesh>(null!);
-        const gltf = useLoader(GLTFLoader, fileUrl);
-
-        return (
-            <mesh ref={mesh} position={position} rotation={rotation}>
-                <primitive object={gltf.scene} />
-            </mesh>
-        );
-    }
+   
 
     const Plane = () => {
         const texture = useLoader(TextureLoader, 'public/assets/texture.png'); // Use the PNG version of your SVG
@@ -70,7 +58,6 @@ const Menu = () => {
 
                     {/* Lighting */}
                     <ambientLight intensity={5} color={'white'} /> {/* Soft overall light */}
-
                     <Model fileUrl={"public/assets/GLTF/Inkfish_LOD1.glb"} position={[-1.6, -1, 3]} rotation={[0, Math.PI * 0.3, 0]}/>
                     <Plane />
                 </Canvas>
