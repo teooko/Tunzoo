@@ -21,22 +21,10 @@ const Menu = () => {
                 className="h-screen w-screen relative"
             >
                 {/* Black div that overlays the canvas */}
-                <div style={{
-                    width: "50%",
-                    height: "100%",
-                    backgroundColor: "black",
-                    position: "absolute", // Position absolute to overlay
-                    top: 0, // Align to the top
-                    right: 0, // Stretch to the right
-                    zIndex: 2,
-                    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 30% 100%)'
-                }} />
+                <div  className="absolute top-0 right-0 w-1/2 h-full bg-black z-20"
+                      style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 30% 100%)' }}/>
 
-                <Canvas style={{
-                    height: "94%",
-                    position: 'relative', // Set position to relative
-                    zIndex: 1 // Canvas behind the black div
-                }}>
+                <Canvas className="relative h-[94%] z-10">
                     {/* Camera Controls */}
                     <OrbitControls />
 
