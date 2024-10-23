@@ -5,6 +5,7 @@ import {
 import {motion} from "framer-motion";
 import Model from "./Model.tsx";
 import TexturedPlane from "./TexturedPlane.tsx";
+import '../App.css';
 const Menu = () => {
     return (
         <>
@@ -17,7 +18,7 @@ const Menu = () => {
                     repeat: Infinity,
                     repeatType: 'mirror',
                 }}
-                style={{ height: "100vh", width: "100vw", position: 'relative' }} // Set position relative
+                className="h-screen w-screen relative"
             >
                 {/* Black div that overlays the canvas */}
                 <div style={{
