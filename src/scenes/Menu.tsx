@@ -1,30 +1,13 @@
-﻿import {Canvas, useLoader, useThree} from "@react-three/fiber";
+﻿import {Canvas} from "@react-three/fiber";
 import {
     OrbitControls,
 } from "@react-three/drei";
-import { useEffect, useRef } from "react";
-import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
-import {Mesh, TextureLoader} from "three";
 import {motion} from "framer-motion";
 import Model from "./Model.tsx";
-
+import TexturedPlane from "./TexturedPlane.tsx";
 const Menu = () => {
-   
-
-    const Plane = () => {
-        const texture = useLoader(TextureLoader, 'public/assets/texture.png'); // Use the PNG version of your SVG
-
-        return (
-            <mesh position={[0, 0, -5]}>
-                <planeGeometry args={[30, 15]} /> {/* Width and Height of the Plane */}
-                <meshStandardMaterial map={texture} color="#00D9FF" transparent={true} opacity={0.3}/>
-            </mesh>
-        );
-    };
-
     return (
         <>
-
             <motion.div
                 initial={{ backgroundColor: '#66CD79' }}
                 animate={{ backgroundColor: '#03CEA4' }}
@@ -59,7 +42,7 @@ const Menu = () => {
                     {/* Lighting */}
                     <ambientLight intensity={5} color={'white'} /> {/* Soft overall light */}
                     <Model fileUrl={"public/assets/GLTF/Inkfish_LOD1.glb"} position={[-1.6, -1, 3]} rotation={[0, Math.PI * 0.3, 0]}/>
-                    <Plane />
+                    <TexturedPlane texturePath={'public/assets/texture.png'} position={[0, 0, -5]} size={[30, 15]}/>
                 </Canvas>
             </motion.div>
         </>
