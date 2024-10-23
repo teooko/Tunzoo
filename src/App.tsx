@@ -1,39 +1,34 @@
 import {Canvas, useLoader, useThree} from "@react-three/fiber";
-import {OrbitControls, Box, Sphere, CubicBezierLine, Ring, Dodecahedron, Circle} from "@react-three/drei";
+import {
+    OrbitControls,
+    Box,
+    Sphere,
+    CubicBezierLine,
+    Ring,
+    Dodecahedron,
+    Circle,
+    useGLTF,
+    Detailed
+} from "@react-three/drei";
 import './App.css';
 import { useEffect, useRef } from "react";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
-import {TextureLoader} from "three";
+import {Mesh, TextureLoader} from "three";
 import {motion} from "framer-motion";
 
 function App() {
-    const GltfModel = ({ glbUrl }) => {
-        const modelRef = useRef();
 
-        useEffect(() => {
-            const loader = new GLTFLoader();
+    function Model() {
+        const fileUrl = "public/assets/GLTF/Inkfish_LOD1.glb";
+        const mesh = useRef<Mesh>(null!);
+        const gltf = useLoader(GLTFLoader, fileUrl);
 
-            loader.load(
-                glbUrl,
-                (gltf) => {
-                    modelRef.current.add(gltf.scene); // Add the loaded model to the scene
-                },
-                undefined, // onProgress callback
-                (error) => {
-                    console.error("An error happened:", error); // Handle errors
-                }
-            );
-
-            return () => {
-                // Clean up on unmount
-                if (modelRef.current) {
-                    modelRef.current.clear();
-                }
-            };
-        }, [glbUrl]);
-
-        return <group ref={modelRef} position={[-1.6, -1, 3]} rotation={[0, Math.PI * 0.3, 0]}/>;
-    };
+        return (
+            <mesh ref={mesh} position={[-1.6, -1, 3]} rotation={[0, Math.PI * 0.3, 0]}>
+                <primitive object={gltf.scene} />
+            </mesh>
+        );
+    }
 
     const Plane = () => {
         const texture = useLoader(TextureLoader, 'public/assets/texture.png'); // Use the PNG version of your SVG
@@ -92,7 +87,7 @@ function App() {
                     {/* Lighting */}
                     <ambientLight intensity={5} color={'white'} /> {/* Soft overall light */}
 
-                    <GltfModel glbUrl="public/assets/GLTF/Inkfish_LOD1.glb" />
+                    <Model />
                     <Plane />
                     <Fern />
                 </Canvas>
