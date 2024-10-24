@@ -30,7 +30,7 @@ const Menu = () => {
 
                     {/* Lighting */}
                     <ambientLight intensity={5} color={'white'} /> {/* Soft overall light */}
-                    <Model fileUrl={"public/assets/GLTF/Inkfish_LOD1.glb"} position={[-1.6, -1, 3]} rotation={[0, Math.PI * 0.3, 0]}/>
+                    <Model fileUrl={"public/assets/GLTF/Animations/Inkfish_Animations.glb"} position={[-1.6, -1, 3]} rotation={[0, Math.PI * 0.3, 0]}/>
                     <TexturedPlane texturePath={'public/assets/texture.png'} position={[0, 0, -5]} size={[30, 15]}/>
                 </Canvas>
             </motion.div>
