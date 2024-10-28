@@ -6,6 +6,7 @@ import '../App.css';
 import React, {useEffect, useState} from "react";
 import CameraController from "./CameraController.tsx";
 import useMousePosition from "./useMousePosition.tsx";
+import Button from "./Button.tsx";
 const Menu = () => {
     const mousePosition = useMousePosition();
     return (
@@ -22,8 +23,13 @@ const Menu = () => {
                 className="h-screen w-screen relative"
             >
                 
-                <div  className="absolute top-0 right-0 w-1/2 h-full bg-black z-20"
+                <div  className="absolute top-0 right-0 w-1/2 h-full bg-black z-20 flex items-center justify-center h-screen "
                       style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 200px 100%)' }}>
+                    <div style={{ width: "300px"}} >
+                        <Button label={"Play Solo"} />
+                        <Button label={"Create Lobby"} />
+
+                    </div>
                 </div>
 
                 <Canvas className="relative h-[94%] z-10" >
