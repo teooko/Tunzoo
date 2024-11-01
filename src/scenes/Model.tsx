@@ -15,7 +15,7 @@ const Model : React.FC<{
     
     useEffect(() => {
         if (actions.Idle_A) {
-            actions.Idle_A.timeScale = 0.5;
+            actions.Idle_A.timeScale = 0.2;
             actions.Idle_A.play();  
         }
     }, [mixer]);
