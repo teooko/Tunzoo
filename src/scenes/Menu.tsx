@@ -15,20 +15,20 @@ const Menu = () => {
     return (
         <div>
             <motion.div
-                initial={{ backgroundColor: '#7fef94' }}
-                animate={{ backgroundColor: '#03CEA4' }}
+                initial={{ backgroundColor: '#62149B' }}
+                animate={{ backgroundColor: ['#03CEA4', '#B295FF', '#62149B'] }}
                 transition={{
-                    duration: 3,
+                    duration: 10,
                     ease: 'linear',
                     repeat: Infinity,
                     repeatType: 'mirror',
                 }}
                 className="h-screen w-screen relative"
             >
-                
-                <div  className="absolute top-0 right-0 w-1/2 h-full bg-black z-20 flex items-center justify-center h-screen "
-                      style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 200px 100%)' }}>
-                    <div style={{ width: "300px"}} >
+
+                <div className="absolute top-0 right-0 w-1/2 h-full bg-black z-20"
+                     style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 200px 100%)' }}>
+                    <div className="flex flex-col items-center justify-center h-full space-y-4">
                         <Button label={"Play Solo"} />
                         <Button label={"Create Lobby"} />
                     </div>
@@ -38,7 +38,7 @@ const Menu = () => {
                     <CameraController mousePosition={mousePosition} />
                     <Polyhedron />
                     <ambientLight intensity={5} color={'white'} /> {/* Soft overall light */}
-                    <Model fileUrl={"public/assets/GLTF/Animations/Inkfish_Animations.glb"} position={[-1.6, -1, 3]} rotation={[0, Math.PI * 0.3, 0]}/>
+                    <Model fileUrl={"public/assets/GLTF/Animations/Muskrat_Animations.glb"} position={[-1.6, -1, 3]} rotation={[0, Math.PI * 0.3, 0]}/>
                     <TexturedPlane texturePath={'public/assets/texture.png'} position={[0, 0, -5]} size={[30, 15]}/>
                     <SpinningModel position={[0, -3, 0]} rotation={[0, 0, 0]} />
                     <SpinningModel position={[-12, 4, -3]} rotation={[3, 0, 0]} />
