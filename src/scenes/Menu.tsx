@@ -7,9 +7,11 @@ import React, {useEffect, useState} from "react";
 import CameraController from "./CameraController.tsx";
 import useMousePosition from "./useMousePosition.tsx";
 import Button from "./Button.tsx";
-import {Polyhedron} from "@react-three/drei";
+import {Polyhedron, Svg} from "@react-three/drei";
 import PlainModel from "./PlainModel.tsx";
 import SpinningModel from "./SpinningModel.tsx";
+import svgs from "../../public/assets/svgs.js"
+import Caret from "./Caret.tsx";
 const Menu = () => {
     const mousePosition = useMousePosition();
     return (
@@ -33,13 +35,14 @@ const Menu = () => {
                         <Button label={"Create Lobby"} />
                     </div>
                 </div>
-
                 <Canvas className="relative h-[94%] z-10" >
                     <CameraController mousePosition={mousePosition} />
                     <Polyhedron />
                     <ambientLight intensity={5} color={'white'} /> {/* Soft overall light */}
                     <Model fileUrl={"public/assets/GLTF/Animations/Muskrat_Animations.glb"} position={[-1.6, -1, 3]} rotation={[0, Math.PI * 0.3, 0]}/>
                     <TexturedPlane texturePath={'public/assets/texture.png'} position={[0, 0, -5]} size={[30, 15]}/>
+                    <Caret texturePath={'public/assets/caretLeft.png'} position={[-2.6, -0.5, 3]} size={[0.1, 0.2]}/>
+                    <Caret texturePath={'public/assets/caretRight.png'} position={[-0.6, -0.5, 3]} size={[0.1, 0.2]}/>
                     <SpinningModel position={[0, -3, 0]} rotation={[0, 0, 0]} />
                     <SpinningModel position={[-12, 4, -3]} rotation={[3, 0, 0]} />
                     <SpinningModel position={[-6, 3, -3]} rotation={[0, 0, 0]} />
