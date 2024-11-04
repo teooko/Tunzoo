@@ -20,15 +20,17 @@ const Model : React.FC<{
     
     const mesh = useRef<Mesh>(null!);
     const models = modelPaths.map((fileUrl: string) => useLoader(GLTFLoader, fileUrl));
-    
-    const {actions, mixer} = useAnimations(models[modelIndex].animations, models[modelIndex].scene);
+    const modelsAnimations = models.map((model, index) => {
+        const {actions, mixer} = useAnimations(models[index].animations, models[modelIndex].scene);
+        return {actions: actions, mixer: mixer};
+    })
     
     useEffect(() => {
-        if (actions.Idle_A) {
-            actions.Idle_A.timeScale = 0.2;
-            actions.Idle_A.play();  
+        if (modelsAnimations[modelIndex].actions.Idle_A) {
+            modelsAnimations[modelIndex].actions.Idle_A.timeScale = 0.2;
+            modelsAnimations[modelIndex].actions.Idle_A.play();  
         }
-    }, [mixer]);
+    }, [modelIndex]);
     
     return (
         <mesh ref={mesh} position={position} rotation={rotation}>
