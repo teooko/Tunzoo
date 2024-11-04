@@ -27,7 +27,7 @@ const Model : React.FC<{
     
     useEffect(() => {
         if (modelsAnimations[modelIndex].actions.Idle_A) {
-            modelsAnimations[modelIndex].actions.Idle_A.timeScale = 0.2;
+            modelsAnimations[modelIndex].actions.Idle_A.timeScale = 0.4;
             modelsAnimations[modelIndex].actions.Idle_A.play();  
         }
     }, [modelIndex]);
