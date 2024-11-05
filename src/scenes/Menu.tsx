@@ -10,6 +10,7 @@ import Button from "./Button.tsx";
 import {Polyhedron} from "@react-three/drei";
 import SpinningModel from "./SpinningModel.tsx";
 import Caret from "./Caret.tsx";
+import OverlayMenu from "./OverlayMenu.tsx";
 const Menu = () => {
     const mousePosition = useMousePosition();
     const [playerIndex, setPlayerIndex] = useState(0);
@@ -28,15 +29,7 @@ const Menu = () => {
                 className="h-screen w-screen relative"
             >
 
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-black z-20"
-                     style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 200px 100%)' }}>
-                    
-                    <div className="flex flex-col items-center justify-center h-full space-y-4">
-                        <img src={"public/assets/tunzooLogo.png"} width={400} height={400} />
-                        <Button label={"Play Solo"} />
-                        <Button label={"Create Lobby"} />
-                    </div>
-                </div>
+                <OverlayMenu />
                 <Canvas className="relative h-[94%] z-10" >
                     <CameraController mousePosition={mousePosition} />
                     <Polyhedron />
