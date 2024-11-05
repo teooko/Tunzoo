@@ -1,5 +1,4 @@
-﻿import React from 'react';
-import Button from "./Button.tsx";
+﻿import Button from "./Button.tsx";
 
 const OverlayMenu = () => {
     return (
