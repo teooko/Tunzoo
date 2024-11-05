@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-const Button = ({label}) => {
+﻿const Button = ({label}: {label: string}) => {
     return (
         <a href="#_"
            className="relative inline-flex items-center justify-start overflow-hidden inline-block px-14 py-6 font-bold rounded-full group">

@@ -1,13 +1,9 @@
-﻿import React from 'react';
-import {useLoader} from "@react-three/fiber";
+﻿import {useLoader} from "@react-three/fiber";
 import {TextureLoader} from "three";
+import {type TexturedPlaneProps} from "../../lib/types.ts";
 
-const TexturedPlane: React.FC<{
-    texturePath: string,
-    position: [number, number, number]
-    size: [number, number]
-}> = ({texturePath, position, size}) => {
-    const texture = useLoader(TextureLoader, texturePath); // Use the PNG version of your SVG
+const TexturedPlane = ({texturePath, position, size}: TexturedPlaneProps) => {
+    const texture = useLoader(TextureLoader, texturePath);
 
     return (
         <mesh position={position}>

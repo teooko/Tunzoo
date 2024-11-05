@@ -1,6 +1,7 @@
 ﻿import Caret from "./Caret.tsx";
+import React from "react";
 
-const Carets = ({setPlayerIndex}) => {
+const Carets = ({setPlayerIndex}: {setPlayerIndex: React.Dispatch<React.SetStateAction<number>>}) => {
     const handlePressLeft = () => {
         setPlayerIndex((state: number) => state - 1 < 0 ? 7 : state - 1);
     }
