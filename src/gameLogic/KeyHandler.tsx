@@ -21,18 +21,20 @@ const KeyHandler = (hitMap: Hit[], setLastHit) => {
                     else
                     setLastHit("miss")
                 cancel = true;
-                setTimeout(() => cancel = false, 100);
             }
         }
-        
     };
+    
+    const handleKeyUp = () => {
+        cancel = false;
+    }
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
-       // window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
-            //window.removeEventListener('keyup', handleKeyUp);
+            window.removeEventListener('keyup', handleKeyUp);
         };
     }, [hitMap]);
 };
