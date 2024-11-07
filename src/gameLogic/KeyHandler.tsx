@@ -15,7 +15,7 @@ const KeyHandler = (hitMap: Hit[], setLastHit) => {
                         scheduleSound(now, hit.sound);
                         if (now - hit.time - 0.1 < 0.1)
                             setLastHit("perfect")
-                        else if (now - hit.time - 0.1 < 0.2)
+                        else if (now - hit.time - 0.1 < 0.15)
                             setLastHit("good")
                     }
                     else
