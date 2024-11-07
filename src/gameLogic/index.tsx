@@ -10,7 +10,7 @@ const Index = () => {
     const [hitMap, setHitMap] = useState<Hit[]>([]);
     const [visibleHits, setVisibleHits] = useState<number[]>([]);
     const [lastHit, setLastHit] = useState("none");
-    KeyHandler(hitMap, setLastHit);
+    KeyHandler(hitMap, setLastHit, setVisibleHits, visibleHits);
 
     const startSong = () => {
         const volume = new Tone.Volume(-100);
@@ -29,12 +29,8 @@ const Index = () => {
 
             newHitMap.forEach((hit) => {
                 transport.scheduleOnce(() => {
-                    setVisibleHits(prevKeys => [...prevKeys, hit.time]); // Add the hit
-                    setTimeout(() => {
-                        // Remove only the specific hit that was added 1 second ago
-                        //setVisibleHits(currentKeys => currentKeys.filter(key => key !== hit.time));
-                    }, 1000);
-                }, hit.time - 1); // Schedule the hit at the right time
+                    setVisibleHits(prevKeys => [...prevKeys, hit.time]);
+                }, hit.time - 1);
             });
 
             transport.start();
@@ -49,7 +45,7 @@ const Index = () => {
                 {
                     visibleHits.map((hit, index) =>
                         <motion.div
-                            key={index}
+                            key={hit}
                             className="falling-key"
                             initial={{ x: "100vw"}} // Start position
                             animate={{ x: 63,
