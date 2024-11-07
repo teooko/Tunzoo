@@ -3,17 +3,14 @@ import {useRef, useState} from "react";
 import * as Tone from "tone";
 import KeyHandler from "./KeyHandler.tsx";
 import {loadMap} from "./hitMapper.tsx";
-interface Hit {
-    time: number; // Time in seconds
-    sound: Tone.Player; // The sound associated with the hit
-}
+import {Hit} from "../../lib/types.ts";
 
 const Index = () => {
     const audioRef = useRef<Tone.Player | null>(null); // Create a ref for audio
     const [hitMap, setHitMap] = useState<Hit[]>([]);
     const [visibleHits, setVisibleHits] = useState<number[]>([]);
-
-    KeyHandler(hitMap);
+    const [lastHit, setLastHit] = useState("none");
+    KeyHandler(hitMap, setLastHit);
 
     const startSong = () => {
         const volume = new Tone.Volume(-100);
@@ -67,6 +64,7 @@ const Index = () => {
                         </motion.div>)
                 }
             </div>
+            <div>{lastHit}</div>
         </div>
     );
 };

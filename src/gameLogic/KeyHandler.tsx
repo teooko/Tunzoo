@@ -1,26 +1,27 @@
 ﻿import { useEffect } from 'react';
 import * as Tone from "tone";
-
-interface Hit {
-    time: number; // Time in seconds
-    sound: Tone.Player; // The sound associated with the hit
-}
+import {Hit} from "../../lib/types.ts";
 function scheduleSound(time: number, sound: Tone.Player) {
     sound.start(time);
 }
-const KeyHandler = (hitMap: Hit[]) => {
+const KeyHandler = (hitMap: Hit[], setLastHit) => {
+    let cancel = false;
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'k') {
-            // Check if the timing is correct
-            const now = Tone.now(); // Get current time in Tone.js
-            const hit = hitMap.find(hit => Math.abs(now - hit.time) < 0.2);
-            const transport = Tone.getTransport();
-            if (hit) { // 100ms window
-                scheduleSound(now, hit.sound); // Play hit feedback
-                if(now - hit.time < 0.1)
-                    console.log("perfect")
-                else if(now - hit.time < 0.2)
-                    console.log("good")
+            if(!cancel) {
+                    const now = Tone.now();
+                    const hit = hitMap.find(hit => Math.abs(now - hit.time - 0.1) < 0.2);
+                    if(hit) {
+                        scheduleSound(now, hit.sound);
+                        if (now - hit.time - 0.1 < 0.1)
+                            setLastHit("perfect")
+                        else if (now - hit.time - 0.1 < 0.2)
+                            setLastHit("good")
+                    }
+                    else
+                    setLastHit("miss")
+                cancel = true;
+                setTimeout(() => cancel = false, 100);
             }
         }
         
@@ -28,10 +29,10 @@ const KeyHandler = (hitMap: Hit[]) => {
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
-        
-        // Cleanup the event listener on component unmount
+       // window.addEventListener('keydown', handleKeyDown);
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
+            //window.removeEventListener('keyup', handleKeyUp);
         };
     }, [hitMap]);
 };

@@ -1,10 +1,6 @@
 ﻿import * as Tone from 'tone';
-import hitMap from "./hitMap.tsx";
-
-interface Hit {
-    time: number; // Time in seconds
-    sound: Tone.Player; // The sound associated with the hit
-}
+import hitMap from "./TestData/hitMap.tsx";
+import {Hit} from "../../lib/types.ts";
 export const createHitMap = (bpm: number, sound: Tone.Player, songTime: number) => {
     const numberOfHits = Math.floor((songTime / 60) * bpm);
     const hitMap: Hit[] = [];
