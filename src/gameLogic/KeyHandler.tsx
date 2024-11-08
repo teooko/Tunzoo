@@ -9,20 +9,18 @@ const KeyHandler = (hitMap: Hit[], setLastHit, setVisibleHits, visibleHits) => {
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'k') {
             if(!cancel) {
-                    const now = Tone.now();
-                    const hit = hitMap.find(hit => Math.abs(now - hit.time - 0.1) < 0.2);
-                    
+                    const now = Tone.now() - 0.2;
+                    const hit = hitMap.find(hit => Math.abs(now - hit.time) < 0.2);
+                    console.log(visibleHits);
                     if(hit) {
                         scheduleSound(now, hit.sound);
-                        if (now - hit.time - 0.1 < 0.06)
+                        if (now - hit.time < 0.1) {
                             setLastHit("perfect")
-                        else if (now - hit.time - 0.1 < 0.15)
+                        }
+                        else if (now - hit.time < 0.2)
                             setLastHit("good")
                         
-                        setVisibleHits((prevHitMap) => {
-                            return prevHitMap.filter((item) => item !== hit.time)
-                        });
-                        console.log(visibleHits);
+                        setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== hit.time));
                     }
                     else
                     setLastHit("miss")

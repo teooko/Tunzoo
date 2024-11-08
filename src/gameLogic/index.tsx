@@ -43,7 +43,7 @@ const Index = () => {
             <div style={{height: "100px", width: "3px",borderStyle: "solid", position: "absolute", marginLeft: "100px", zIndex: 1, backgroundColor: "blue"}}></div>
             <div style={{display: "flex", flexDirection: "row"}}>
                 {
-                    visibleHits.map((hit, index) =>
+                    visibleHits.map((hit) =>
                         <motion.div
                             key={hit}
                             className="falling-key"
@@ -53,6 +53,7 @@ const Index = () => {
                                     x: -100,
                                 }}}
                             transition={{ duration: 1 }}
+                            onAnimationComplete={() => setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== hit))}
                         >
                             <div style={{fontSize: 30, border: "1px solid black", borderRadius: "100px", width: "80px", height: "80px", position: "absolute", backgroundColor: "red"}}>
 
