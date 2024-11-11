@@ -6,7 +6,7 @@ import {loadMap} from "./hitMapper.tsx";
 import {Hit} from "../../lib/types.ts";
 
 const Index = () => {
-    const audioRef = useRef<Tone.Player | null>(null); // Create a ref for audio
+    const audioRef = useRef<Tone.Player | null>(null);
     const [hitMap, setHitMap] = useState<Hit[]>([]);
     const [visibleHits, setVisibleHits] = useState<number[]>([]);
     const [lastHit, setLastHit] = useState("none");
@@ -40,24 +40,21 @@ const Index = () => {
     return (
         <div>
             <button onClick={() => startSong()}>start</button>
-            <div style={{height: "100px", width: "3px",borderStyle: "solid", position: "absolute", marginLeft: "100px", zIndex: 1, backgroundColor: "blue"}}></div>
+            <div style={{fontSize: 30, border: "1px solid black", borderRadius: "100px", marginLeft: "160px", width: "80px", height: "80px", position: "absolute", backgroundColor: "red"}} />
             <div style={{display: "flex", flexDirection: "row"}}>
                 {
                     visibleHits.map((hit) =>
                         <motion.div
                             key={hit}
                             className="falling-key"
-                            initial={{ x: "100vw"}} // Start position
-                            animate={{ x: 63,
-                                transitionEnd: {
-                                    x: -100,
-                                }}}
-                            transition={{ duration: 1 }}
+                            initial={{ x: 1100}} // Start position
+                            animate={{ x: 100}}
+                            transition={{ duration: 1.1}}
                             onAnimationComplete={() => setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== hit))}
                         >
-                            <div style={{fontSize: 30, border: "1px solid black", borderRadius: "100px", width: "80px", height: "80px", position: "absolute", backgroundColor: "red"}}>
+                            
+                            <div style={{fontSize: 30, border: "1px solid black", borderRadius: "100px", width: "80px", height: "80px", position: "absolute", backgroundColor: "red"}} />
 
-                            </div>
                         </motion.div>)
                 }
             </div>
