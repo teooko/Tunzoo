@@ -30,7 +30,7 @@ const Index = () => {
             newHitMap.forEach((hit) => {
                 transport.scheduleOnce(() => {
                     setVisibleHits(prevKeys => [...prevKeys, hit.time]);
-                }, hit.time - 1);
+                }, hit.time - 0.9);
             });
 
             transport.start();
@@ -40,17 +40,20 @@ const Index = () => {
     return (
         <div>
             <button onClick={() => startSong()}>start</button>
-            <div style={{fontSize: 30, border: "1px solid black", borderRadius: "100px", marginLeft: "160px", width: "80px", height: "80px", position: "absolute", backgroundColor: "red"}} />
+            <div style={{fontSize: 30, border: "1px solid black", borderRadius: "100px", marginLeft: "160px", width: "80px", height: "80px", position: "absolute", backgroundColor: "pink"}} />
             <div style={{display: "flex", flexDirection: "row"}}>
                 {
                     visibleHits.map((hit) =>
                         <motion.div
                             key={hit}
                             className="falling-key"
-                            initial={{ x: 1100}} // Start position
+                            initial={{ x: 1100}} 
                             animate={{ x: 100}}
                             transition={{ duration: 1.1}}
-                            onAnimationComplete={() => setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== hit))}
+                            onAnimationComplete={() => {
+                                console.log("MISS");
+                                setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== hit));
+                            }}
                         >
                             
                             <div style={{fontSize: 30, border: "1px solid black", borderRadius: "100px", width: "80px", height: "80px", position: "absolute", backgroundColor: "red"}} />

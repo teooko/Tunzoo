@@ -10,14 +10,14 @@ const KeyHandler = (hitMap: Hit[], setLastHit, setVisibleHits, visibleHits) => {
         if (event.key === 'k') {
             if(!cancel) {
                     const now = Tone.now();
-                    const hit = visibleHits.find(hit => Math.abs(now - hit) < 0.2);
+                    const hit = visibleHits.find(hit => Math.abs(now - hit - 0.1) < 0.2);
                     console.log(visibleHits);
                     if(hit) {
                         scheduleSound(now, hitMap[0].sound);
-                        if (now - hit < 0.05) {
+                        if (Math.abs(now - hit - 0.1) < 0.1) {
                             setLastHit("perfect")
                         }
-                        else if (now - hit < 0.1)
+                        else if (Math.abs(now - hit - 0.1) < 0.2)
                             setLastHit("good")
                         
                         setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== hit));
