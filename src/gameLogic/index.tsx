@@ -51,7 +51,7 @@ const Index = () => {
                             animate={{ x: 100}}
                             transition={{ duration: 1.1}}
                             onAnimationComplete={() => {
-                                console.log("MISS");
+                                setLastHit("miss");
                                 setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== hit));
                             }}
                         >
