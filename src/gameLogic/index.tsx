@@ -10,7 +10,9 @@ const Index = () => {
     const [hitMap, setHitMap] = useState<Hit[]>([]);
     const [visibleHits, setVisibleHits] = useState<number[]>([]);
     const [lastHit, setLastHit] = useState("none");
-    KeyHandler(hitMap, setLastHit, setVisibleHits, visibleHits);
+    const [score, setScore] = useState(0);
+    const [combo, setCombo] = useState(0);
+    KeyHandler(hitMap, setLastHit, setVisibleHits, visibleHits, setScore, setCombo, combo);
 
     const startSong = () => {
         const volume = new Tone.Volume(-100);
@@ -62,6 +64,8 @@ const Index = () => {
                 }
             </div>
             <div>{lastHit}</div>
+            <div>Score: {score}</div>
+            <div>Combo: {combo}</div>
         </div>
     );
 };
