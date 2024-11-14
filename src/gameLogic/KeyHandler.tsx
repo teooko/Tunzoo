@@ -6,12 +6,16 @@ function scheduleSound(time: number, sound: Tone.Player) {
 }
 const KeyHandler = (hitMap: Hit[], setLastHit, setVisibleHits, visibleHits, setScore, setCombo, combo) => {
     let cancel = false;
+    
+    // Create a type/object for player details
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'k') {
             if(!cancel) {
+                
+                // Extract in a function
                 const now = Tone.now();
                 const hit = visibleHits.find(hit => Math.abs(now - hit - 0.15) < 0.1);
-                console.log(visibleHits);
+                
                 if(hit) {
                     scheduleSound(now, hitMap[0].sound);
 

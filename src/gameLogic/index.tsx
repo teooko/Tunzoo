@@ -4,32 +4,31 @@ import * as Tone from "tone";
 import KeyHandler from "./KeyHandler.tsx";
 import {loadMap} from "./hitMapper.tsx";
 import {Hit} from "../../lib/types.ts";
+import LoadMap from "./LoadMap.tsx";
 
 const Index = () => {
-    const audioRef = useRef<Tone.Player | null>(null);
     const [hitMap, setHitMap] = useState<Hit[]>([]);
+    const audioRef = useRef<Tone.Player | null>(null);
     const [visibleHits, setVisibleHits] = useState<number[]>([]);
+    
+    //  Scoring
     const [lastHit, setLastHit] = useState("none");
     const [score, setScore] = useState(0);
     const [combo, setCombo] = useState(0);
+    
+    
     KeyHandler(hitMap, setLastHit, setVisibleHits, visibleHits, setScore, setCombo, combo);
-
+    LoadMap(hitMap, setHitMap, audioRef);
+    
+    // Extract this function
     const startSong = () => {
-        const volume = new Tone.Volume(-100);
-        const audio = new Tone.Player("public/assets/peak.mp3").chain(volume, Tone.getDestination()).toDestination();
-        audioRef.current = audio;
-
-        const hitSound = new Tone.Player("public/assets/snare.mp3").toDestination();
-        const newHitMap = loadMap(hitSound);
-
-        setHitMap(newHitMap);
-
+        
         Tone.loaded().then(() => {
 
             const transport = Tone.getTransport();
             audioRef.current?.start();
 
-            newHitMap.forEach((hit) => {
+            hitMap.forEach((hit) => {
                 transport.scheduleOnce(() => {
                     setVisibleHits(prevKeys => [...prevKeys, hit.time]);
                 }, hit.time - 0.9);
@@ -53,6 +52,7 @@ const Index = () => {
                             animate={{ x: 100}}
                             transition={{ duration: 1.1}}
                             onAnimationComplete={() => {
+                                setCombo(0);
                                 setLastHit("miss");
                                 setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== hit));
                             }}
