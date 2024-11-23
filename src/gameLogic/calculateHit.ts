@@ -18,6 +18,7 @@ const calculateScore = (baseScore: number, combo: number): number => {
 const scheduleSound = (time: number, sound: Tone.Player) => {
     sound.start(time);
 }
+
 export const calculateHit = (hitMap: Hit[], setLastHit, setVisibleHits, visibleHits, setScore, setCombo, combo) => {
     const now = Tone.now();
     const hit = visibleHits.find(hit => Math.abs(now - hit - 0.15) < 0.1);
@@ -31,8 +32,5 @@ export const calculateHit = (hitMap: Hit[], setLastHit, setVisibleHits, visibleH
         setLastHit(hitType);
         setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== hit));
         setCombo(combo => combo + 1);
-    } else {
-        setLastHit("miss");
-        setCombo(0);
     }
 }
