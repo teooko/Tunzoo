@@ -2,14 +2,14 @@
 import {Hit} from "../../lib/types.ts";
 import {calculateHit} from "./calculateHit.ts";
 
-const KeyHandler = (hitMap: Hit[], setLastHit, setVisibleHits, visibleHits, setScore, setCombo, combo) => {
+const KeyHandler = (hitMap: Hit[], setHitQuality, setVisibleHits, visibleHits, setScore, setCombo, combo) => {
     let cancel = false;
     
     // Create a type/object for player details
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'k') {
             if(!cancel) {
-                calculateHit(hitMap, setLastHit, setVisibleHits, visibleHits, setScore, setCombo, combo);
+                calculateHit(hitMap, setHitQuality, setVisibleHits, visibleHits, setScore, setCombo, combo);
                 cancel = true;
             }
         }

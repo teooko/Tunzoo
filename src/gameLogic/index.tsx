@@ -12,12 +12,12 @@ const Index = () => {
     const [visibleHits, setVisibleHits] = useState<number[]>([]);
     
     //  Scoring
-    const [lastHit, setLastHit] = useState("none");
+    const [hitQuality, setHitQuality] = useState("none");
     const [score, setScore] = useState(0);
     const [combo, setCombo] = useState(0);
     
     
-    KeyHandler(hitMap, setLastHit, setVisibleHits, visibleHits, setScore, setCombo, combo);
+    KeyHandler(hitMap, setHitQuality, setVisibleHits, visibleHits, setScore, setCombo, combo);
     LoadMap(hitMap, setHitMap, audioRef);
     
     // Extract this function
@@ -53,7 +53,7 @@ const Index = () => {
                             transition={{ duration: 1.1}}
                             onAnimationComplete={() => {
                                 setCombo(0);
-                                setLastHit("miss");
+                                setHitQuality("miss");
                                 setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== hit));
                             }}
                         >
@@ -63,7 +63,7 @@ const Index = () => {
                         </motion.div>)
                 }
             </div>
-            <div>{lastHit}</div>
+            <div>{hitQuality}</div>
             <div>Score: {score}</div>
             <div>Combo: {combo}</div>
         </div>
