@@ -10,11 +10,7 @@ const Index = () => {
     const [hitMap, setHitMap] = useState<Hit[]>([]);
     const audioRef = useRef<Tone.Player | null>(null);
     const [visibleHits, setVisibleHits] = useState<number[]>([]);
-    
-    //  Scoring
-    //const [hitQuality, setHitQuality] = useState("none");
-    //const [score, setScore] = useState(0);
-    //const [combo, setCombo] = useState(0);
+
     const {hitQuality, score, combo, resetCombo, updateHitQuality} = useScoringStore.getState();
     
     KeyHandler(hitMap, setVisibleHits, visibleHits);
@@ -37,7 +33,13 @@ const Index = () => {
             transport.start();
         });
     };
-
+    
+    const handleHitEndReached = (hit: number) => {
+        resetCombo();
+        updateHitQuality("miss");
+        setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== hit));
+    }
+    
     return (
         <div>
             <button onClick={() => startSong()}>start</button>
@@ -51,14 +53,8 @@ const Index = () => {
                             initial={{ x: 1100}} 
                             animate={{ x: 100}}
                             transition={{ duration: 1.1}}
-                            onAnimationComplete={() => {
-                                // create a function for this
-                                resetCombo();
-                                updateHitQuality("miss");
-                                setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== hit));
-                            }}
+                            onAnimationComplete={() => handleHitEndReached(hit)}
                         >
-                            
                             <div style={{fontSize: 30, border: "1px solid black", borderRadius: "100px", width: "80px", height: "80px", position: "absolute", backgroundColor: "red"}} />
 
                         </motion.div>)
