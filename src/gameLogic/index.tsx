@@ -4,6 +4,7 @@ import * as Tone from "tone";
 import KeyHandler from "./KeyHandler.tsx";
 import {Hit} from "../../lib/types.ts";
 import LoadMap from "./LoadMap.tsx";
+import {useScoringStore} from "./store.tsx";
 
 const Index = () => {
     const [hitMap, setHitMap] = useState<Hit[]>([]);
@@ -11,12 +12,12 @@ const Index = () => {
     const [visibleHits, setVisibleHits] = useState<number[]>([]);
     
     //  Scoring
-    const [hitQuality, setHitQuality] = useState("none");
-    const [score, setScore] = useState(0);
-    const [combo, setCombo] = useState(0);
+    //const [hitQuality, setHitQuality] = useState("none");
+    //const [score, setScore] = useState(0);
+    //const [combo, setCombo] = useState(0);
+    const {hitQuality, score, combo, resetCombo, updateHitQuality} = useScoringStore.getState();
     
-    
-    KeyHandler(hitMap, setHitQuality, setVisibleHits, visibleHits, setScore, setCombo, combo);
+    KeyHandler(hitMap, setVisibleHits, visibleHits);
     LoadMap(hitMap, setHitMap, audioRef);
     
     // Extract this function
@@ -52,8 +53,8 @@ const Index = () => {
                             transition={{ duration: 1.1}}
                             onAnimationComplete={() => {
                                 // create a function for this
-                                setCombo(0);
-                                setHitQuality("miss");
+                                resetCombo();
+                                updateHitQuality("miss");
                                 setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== hit));
                             }}
                         >

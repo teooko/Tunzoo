@@ -12,6 +12,7 @@ type ScoringStore = {
     incrementCombo: () => void;
     resetCombo: () => void;
     increaseScore: (baseScore: number) => void;
+    updateHitQuality: (newHitQuality: string) => void;
 };
 
 export const useScoringStore = create<ScoringStore>((set) => ({
@@ -22,4 +23,5 @@ export const useScoringStore = create<ScoringStore>((set) => ({
     resetCombo: () => set(() => ({ combo: 0 })),
     increaseScore: (baseScore) => set((state) => 
         ({score: state.score + calculateScore(baseScore, state.combo)})),
+    updateHitQuality: (newHitQuality) => set(() => ({hitQuality: newHitQuality}))
 }));

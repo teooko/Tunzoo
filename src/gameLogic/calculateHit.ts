@@ -1,5 +1,6 @@
 ﻿import * as Tone from "tone";
 import {Hit} from "../../lib/types.ts";
+import {useScoringStore} from "./store.tsx";
 
 const getHitDetails = (timingOffset: number | null): { hitQualityType: string; baseScore: number } => {
     if(timingOffset === null)
@@ -13,32 +14,27 @@ const getHitDetails = (timingOffset: number | null): { hitQualityType: string; b
     return { hitQualityType: "miss", baseScore: 0 };
 };
 
-const calculateScore = (baseScore: number, combo: number): number => {
-    const multiplier = 1 + combo * 0.01;
-    return Math.floor(baseScore * multiplier);
-};
-
 const scheduleSound = (time: number, sound: Tone.Player) => {
     sound.start(time);
 }
 
 // set the hardcoded time tweaking values to constants
-export const calculateHit = (hitMap: Hit[], setHitQuality, setVisibleHits, visibleHits, setScore, setCombo, combo) => {
+export const calculateHit = (hitMap: Hit[],setVisibleHits, visibleHits) => {
     const now = Tone.now();
     const matchedHit = visibleHits.find(hit => Math.abs(now - hit - 0.15) < 0.1);
-
+    const {incrementCombo, resetCombo, increaseScore, updateHitQuality} = useScoringStore.getState();
     if(matchedHit) {
         scheduleSound(now, hitMap[0].sound);
         const timingOffset = Math.abs(now - matchedHit - 0.15);
         const { hitQualityType, baseScore } = getHitDetails(timingOffset);
 
-        setScore(calculateScore(baseScore, combo));
-        setHitQuality(hitQualityType);
+        increaseScore(baseScore);
+        updateHitQuality(hitQualityType);
         setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== matchedHit));
-        setCombo(combo => combo + 1);
+        incrementCombo();
     } else {
         const { hitQualityType } = getHitDetails(null);
-        setHitQuality(hitQualityType);
-        setCombo(0);
+        updateHitQuality(hitQualityType);
+        resetCombo();
     }
 }
