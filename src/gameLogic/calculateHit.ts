@@ -22,6 +22,7 @@ const scheduleSound = (time: number, sound: Tone.Player) => {
     sound.start(time);
 }
 
+// set the hardcoded time tweaking values to constants
 export const calculateHit = (hitMap: Hit[], setHitQuality, setVisibleHits, visibleHits, setScore, setCombo, combo) => {
     const now = Tone.now();
     const matchedHit = visibleHits.find(hit => Math.abs(now - hit - 0.15) < 0.1);

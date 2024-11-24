@@ -13,7 +13,6 @@ const KeyHandler = (hitMap: Hit[], setHitQuality, setVisibleHits, visibleHits, s
                 cancel = true;
             }
         }
-
     };
     
     const handleKeyUp = () => {

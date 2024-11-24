@@ -2,7 +2,6 @@
 import {useRef, useState} from "react";
 import * as Tone from "tone";
 import KeyHandler from "./KeyHandler.tsx";
-import {loadMap} from "./hitMapper.tsx";
 import {Hit} from "../../lib/types.ts";
 import LoadMap from "./LoadMap.tsx";
 
@@ -52,6 +51,7 @@ const Index = () => {
                             animate={{ x: 100}}
                             transition={{ duration: 1.1}}
                             onAnimationComplete={() => {
+                                // create a function for this
                                 setCombo(0);
                                 setHitQuality("miss");
                                 setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== hit));
