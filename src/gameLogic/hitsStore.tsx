@@ -12,7 +12,7 @@ type HitsStore = {
 export const useHitsStore = create<HitsStore>((set) => ({
     hitMap: [],
     visibleHits: [],
-    setHitMap: (newHitMap) => set(() => ({hitMap: newHitMap})),
+    setHitMap: (newHitMap) => set(() => ({hitMap: [...newHitMap]})),
     addVisibleHit: (hit) => set((state) => ({visibleHits: [...state.visibleHits, hit.time]})),
     removeVisibleHit: (hit) => set((state) => ({visibleHits: state.visibleHits.filter((visibleHit) => visibleHit !== hit)})),
-}))
+}));

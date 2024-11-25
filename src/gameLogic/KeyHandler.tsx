@@ -1,14 +1,15 @@
 ﻿import { useEffect } from 'react';
-import {Hit} from "../../lib/types.ts";
 import {calculateHit} from "./calculateHit.ts";
+import {useHitsStore} from "./hitsStore.tsx";
 
-const KeyHandler = (hitMap: Hit[], setVisibleHits, visibleHits) => {
+const KeyHandler = () => {
     let cancel = false;
     
+    const {visibleHits} = useHitsStore.getState();
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'k') {
             if(!cancel) {
-                calculateHit(hitMap, setVisibleHits, visibleHits);
+                calculateHit();
                 cancel = true;
             }
         }

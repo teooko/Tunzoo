@@ -1,6 +1,6 @@
 ﻿import * as Tone from "tone";
-import {Hit} from "../../lib/types.ts";
 import {useScoringStore} from "./scoringStore.tsx";
+import {useHitsStore} from "./hitsStore.tsx";
 
 const getHitDetails = (timingOffset: number | null): { hitQualityType: string; baseScore: number } => {
     if(timingOffset === null)
@@ -19,10 +19,12 @@ const scheduleSound = (time: number, sound: Tone.Player) => {
 }
 
 // set the hardcoded time tweaking values to constants
-export const calculateHit = (hitMap: Hit[],setVisibleHits, visibleHits) => {
+export const calculateHit = () => {
+    const {incrementCombo, resetCombo, increaseScore, updateHitQuality} = useScoringStore.getState();
+    const {hitMap, visibleHits, removeVisibleHit} = useHitsStore.getState();
+    
     const now = Tone.now();
     const matchedHit = visibleHits.find(hit => Math.abs(now - hit - 0.15) < 0.1);
-    const {incrementCombo, resetCombo, increaseScore, updateHitQuality} = useScoringStore.getState();
     
     if(matchedHit) {
         scheduleSound(now, hitMap[0].sound);
@@ -31,7 +33,7 @@ export const calculateHit = (hitMap: Hit[],setVisibleHits, visibleHits) => {
 
         increaseScore(baseScore);
         updateHitQuality(hitQualityType);
-        setVisibleHits((prevHitMap) => prevHitMap.filter((item) => item !== matchedHit));
+        removeVisibleHit(matchedHit);
         incrementCombo();
     } else {
         const { hitQualityType } = getHitDetails(null);
