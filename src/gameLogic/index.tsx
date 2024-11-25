@@ -4,7 +4,7 @@ import * as Tone from "tone";
 import KeyHandler from "./KeyHandler.tsx";
 import {Hit} from "../../lib/types.ts";
 import LoadMap from "./LoadMap.tsx";
-import {useScoringStore} from "./store.tsx";
+import {useScoringStore} from "./scoringStore.tsx";
 
 const Index = () => {
     const [hitMap, setHitMap] = useState<Hit[]>([]);

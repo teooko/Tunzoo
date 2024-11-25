@@ -6,7 +6,7 @@ const calculateScore = (baseScore: number, combo: number): number => {
 };
 
 type ScoringStore = {
-    hitQuality: string; // or a specific union type like 'none' | 'perfect' | 'good' | 'miss'
+    hitQuality: string;
     score: number;
     combo: number;
     incrementCombo: () => void;

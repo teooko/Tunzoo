@@ -5,7 +5,6 @@ import {calculateHit} from "./calculateHit.ts";
 const KeyHandler = (hitMap: Hit[], setVisibleHits, visibleHits) => {
     let cancel = false;
     
-    // Create a type/object for player details
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'k') {
             if(!cancel) {
