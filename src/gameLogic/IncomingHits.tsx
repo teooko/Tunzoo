@@ -1,6 +1,7 @@
 ﻿import {motion} from "framer-motion";
 import {useHitsStore} from "./Stores/hitsStore.tsx";
 import {useScoringStore} from "./Stores/scoringStore.tsx";
+import HitCircle from "./HitCircle.tsx";
 
 const IncomingHits = () => {
     const { removeVisibleHit } = useHitsStore((state) => state);
@@ -24,17 +25,7 @@ const IncomingHits = () => {
                     transition={{ duration: 1.1 }}
                     onAnimationComplete={() => handleHitEndReached(hit)}
                 >
-                    <div
-                        style={{
-                            fontSize: 30,
-                            border: "1px solid black",
-                            borderRadius: "100px",
-                            width: "80px",
-                            height: "80px",
-                            position: "absolute",
-                            backgroundColor: "red",
-                        }}
-                    />
+                    <HitCircle />
                 </motion.div>
             ))}
         </>

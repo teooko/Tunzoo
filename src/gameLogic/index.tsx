@@ -16,7 +16,7 @@ const Index = () => {
     return (
         <div>
             <button onClick={() => startSong(audioRef)}>start</button>
-            <div style={{fontSize: 30, border: "1px solid black", borderRadius: "100px", marginLeft: "160px", width: "80px", height: "80px", position: "absolute", backgroundColor: "pink"}} />
+            <div style={{fontSize: 30, borderRadius: "100px", marginLeft: "160px", width: "80px", height: "80px", position: "absolute", backgroundColor: "pink"}} />
             <div style={{display: "flex", flexDirection: "row"}}>
               <IncomingHits />
             </div>
