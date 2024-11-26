@@ -1,5 +1,5 @@
-﻿import {Hit} from "../../lib/types.ts";
-import {create} from "zustand/react";
+﻿import {create} from "zustand/react";
+import {Hit} from "../../../lib/types.ts";
 
 type HitsStore = {
     hitMap: Hit[];

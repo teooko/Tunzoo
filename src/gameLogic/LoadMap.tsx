@@ -1,7 +1,7 @@
 ﻿import {useEffect} from 'react';
 import * as Tone from "tone";
 import {loadMap} from "./hitMapper.tsx";
-import {useHitsStore} from "./hitsStore.tsx";
+import {useHitsStore} from "./Stores/hitsStore.tsx";
 
 export const LoadMap = (audioRef) => {
     const {setHitMap} = useHitsStore.getState();

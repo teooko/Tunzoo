@@ -1,5 +1,5 @@
-﻿import {useHitsStore} from "./hitsStore.tsx";
-import * as Tone from "tone";
+﻿import * as Tone from "tone";
+import {useHitsStore} from "./Stores/hitsStore.tsx";
 
 export const startSong = (audioRef) => {
     const {hitMap} = useHitsStore.getState();

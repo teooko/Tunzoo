@@ -2,9 +2,9 @@
 import * as Tone from "tone";
 import KeyHandler from "./KeyHandler.tsx";
 import LoadMap from "./LoadMap.tsx";
-import {useScoringStore} from "./scoringStore.tsx";
 import IncomingHits from "./IncomingHits.tsx";
 import {startSong} from "./startSong.ts";
+import {useScoringStore} from "./Stores/scoringStore.tsx";
 
 const Index = () => {
     const audioRef = useRef<Tone.Player | null>(null);

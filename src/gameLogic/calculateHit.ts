@@ -1,6 +1,6 @@
 ﻿import * as Tone from "tone";
-import {useScoringStore} from "./scoringStore.tsx";
-import {useHitsStore} from "./hitsStore.tsx";
+import {useScoringStore} from "./Stores/scoringStore.tsx";
+import {useHitsStore} from "./Stores/hitsStore.tsx";
 
 const getHitDetails = (timingOffset: number | null): { hitQualityType: string; baseScore: number } => {
     if(timingOffset === null)

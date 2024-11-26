@@ -1,6 +1,6 @@
-﻿import {useHitsStore} from "./hitsStore.tsx";
-import {useScoringStore} from "./scoringStore.tsx";
-import {motion} from "framer-motion";
+﻿import {motion} from "framer-motion";
+import {useHitsStore} from "./Stores/hitsStore.tsx";
+import {useScoringStore} from "./Stores/scoringStore.tsx";
 
 const IncomingHits = () => {
     const { removeVisibleHit } = useHitsStore((state) => state);

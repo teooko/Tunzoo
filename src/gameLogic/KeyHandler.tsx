@@ -1,6 +1,6 @@
 ﻿import { useEffect } from 'react';
 import {calculateHit} from "./calculateHit.ts";
-import {useHitsStore} from "./hitsStore.tsx";
+import {useHitsStore} from "./Stores/hitsStore.tsx";
 
 const KeyHandler = () => {
     let cancel = false;
