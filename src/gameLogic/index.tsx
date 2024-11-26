@@ -5,7 +5,16 @@ import LoadMap from "./LoadMap.tsx";
 import IncomingHits from "./IncomingHits.tsx";
 import {startSong} from "./startSong.ts";
 import {useScoringStore} from "./Stores/scoringStore.tsx";
+import { motion } from "framer-motion";
 
+const addShadow = (hitQuality) => {
+    if(hitQuality === "perfect")
+        return "0px 0px 20px #50DD49";
+    else if(hitQuality === "good")
+        return "0px 0px 20px #DBCA11";
+    else
+        return "0px 0px 5px #6D38E0";
+}
 const Index = () => {
     const audioRef = useRef<Tone.Player | null>(null);
     const {hitQuality, score, combo} = useScoringStore(state => state);
@@ -16,7 +25,14 @@ const Index = () => {
     return (
         <div>
             <button onClick={() => startSong(audioRef)}>start</button>
-            <div style={{fontSize: 30, borderRadius: "100px", marginLeft: "160px", width: "80px", height: "80px", position: "absolute", backgroundColor: "pink"}} />
+            <motion.div style={{fontSize: 30,
+                boxShadow: "0 0 15px #6D38E0",    
+                borderRadius: "100px", 
+                marginLeft: "160px", 
+                width: "80px", 
+                height: "80px", 
+                position: "absolute", 
+                backgroundColor: "white"}} animate={{ boxShadow: addShadow(hitQuality)}}/>
             <div style={{display: "flex", flexDirection: "row"}}>
               <IncomingHits />
             </div>
