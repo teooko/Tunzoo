@@ -26,13 +26,14 @@ const Index = () => {
         <div>
             <button onClick={() => startSong(audioRef)}>start</button>
             <motion.div style={{fontSize: 30,
-                boxShadow: "0 0 15px #6D38E0",    
                 borderRadius: "100px", 
                 marginLeft: "160px", 
                 width: "80px", 
                 height: "80px", 
                 position: "absolute", 
-                backgroundColor: "white"}} animate={{ boxShadow: addShadow(hitQuality)}}/>
+                backgroundColor: "white"}} animate={{ boxShadow: addShadow(hitQuality)}}
+                        transition={{ duration: 0.5 }}/>
+            
             <div style={{display: "flex", flexDirection: "row"}}>
               <IncomingHits />
             </div>
