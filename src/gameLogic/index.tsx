@@ -1,4 +1,4 @@
-﻿import {useRef} from "react";
+﻿import {useEffect, useRef, useState} from "react";
 import * as Tone from "tone";
 import KeyHandler from "./KeyHandler.tsx";
 import LoadMap from "./LoadMap.tsx";
@@ -7,19 +7,27 @@ import {startSong} from "./startSong.ts";
 import {useScoringStore} from "./Stores/scoringStore.tsx";
 import { motion } from "framer-motion";
 
-const addShadow = (hitQuality) => {
-    if(hitQuality === "perfect")
-        return "0px 0px 20px #50DD49";
-    else if(hitQuality === "good")
-        return "0px 0px 20px #DBCA11";
-    else
-        return "0px 0px 5px #6D38E0";
-}
+
 const Index = () => {
+    
     const audioRef = useRef<Tone.Player | null>(null);
+    const [shadow, setShadow] = useState(true);
     const {hitQuality, score, combo} = useScoringStore(state => state);
     
-    KeyHandler();
+    useEffect(() => {
+        if(shadow)
+            setTimeout(() => setShadow(false), 100);
+    }, [shadow])
+    const addShadow = (hitQuality) => {
+        
+        if(shadow && hitQuality === "perfect") 
+            return "0px 0px 50px 10px #50DD49";
+        else if(shadow && hitQuality === "good")
+            return "0px 0px 50px 10px #DBCA11";
+        return "0px 0px 5px #6D38E0";
+    }
+    
+    KeyHandler(setShadow);
     LoadMap(audioRef);
     
     return (

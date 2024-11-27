@@ -2,7 +2,7 @@
 import {calculateHit} from "./calculateHit.ts";
 import {useHitsStore} from "./Stores/hitsStore.tsx";
 
-const KeyHandler = () => {
+const KeyHandler = (setShadow) => {
     let cancel = false;
     
     const {visibleHits} = useHitsStore.getState();
@@ -10,6 +10,7 @@ const KeyHandler = () => {
         if (event.key === 'k') {
             if(!cancel) {
                 calculateHit();
+                setShadow(true);
                 cancel = true;
             }
         }
