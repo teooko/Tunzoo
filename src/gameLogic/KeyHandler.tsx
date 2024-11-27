@@ -2,13 +2,14 @@
 import {calculateHit} from "./calculateHit.ts";
 import {useHitsStore} from "./Stores/hitsStore.tsx";
 
-const KeyHandler = (setShadow) => {
+const KeyHandler = (setShadow, setJump) => {
     let cancel = false;
     
     const {visibleHits} = useHitsStore.getState();
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'k') {
             if(!cancel) {
+                setJump(true)
                 calculateHit();
                 setShadow(true);
                 cancel = true;
