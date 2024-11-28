@@ -11,7 +11,7 @@ type animationStore = {
     toggleJumpRight: () => void,
 }
 
-const useAnimationStore = create<animationStore>((set) => ({
+export const useAnimationStore = create<animationStore>((set) => ({
     shadow: false, 
     jump: false,  
     jumpRight: true,  

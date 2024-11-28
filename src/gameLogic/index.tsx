@@ -6,18 +6,17 @@ import IncomingHits from "./IncomingHits.tsx";
 import {startSong} from "./startSong.ts";
 import {useScoringStore} from "./Stores/scoringStore.tsx";
 import { motion } from "framer-motion";
+import {useAnimationStore} from "./Stores/animationStore.tsx";
 
 const Index = () => {
     const audioRef = useRef<Tone.Player | null>(null);
-    const [shadow, setShadow] = useState(true);
-    const [jump, setJump] = useState(false);
-    const [coord, setCoord] = useState(true);
+    const {shadow, jump, jumpRight, disableShadow, disableJump, toggleJumpRight } = useAnimationStore((state) => state);
 
     const {hitQuality, score, combo} = useScoringStore(state => state);
     
     useEffect(() => {
         if(shadow)
-            setTimeout(() => setShadow(false), 100);
+            setTimeout(() => disableShadow, 100);
     }, [shadow])
     const addShadow = (hitQuality) => {
         if(shadow && hitQuality === "perfect") 
@@ -29,12 +28,12 @@ const Index = () => {
     useEffect(() => {
         if(jump)
             setTimeout(() => {
-                setJump(false)
-                setCoord(state => !state);
+                toggleJumpRight();
+                disableJump()
             }, 500);
     }, [jump])
     
-    KeyHandler(setShadow, setJump);
+    KeyHandler();
     LoadMap(audioRef);
    
     return (
@@ -49,7 +48,7 @@ const Index = () => {
                 backgroundColor: "white"}} animate={{ boxShadow: addShadow(hitQuality)}}
                         transition={{ duration: 0.5 }}>
                 {jump && <motion.div style={{top: 20, left: 10, position: "absolute", zIndex: -1, textShadow: "0 0 15px #7849E0", color: "white", fontFamily: 'Nunito', fontWeight: "bold", fontSize: 40}}
-                             animate={{left: coord ? 80 : -80, top: 80, opacity: [100, 100, 100, 0]}}
+                             animate={{left: jumpRight ? 80 : -80, top: 80, opacity: [100, 100, 100, 0]}}
                              transition={{duration: 0.5, type: "keyframes"}}>{hitQuality}</motion.div>
                 }
             </motion.div>

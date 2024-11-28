@@ -1,17 +1,20 @@
 ﻿import { useEffect } from 'react';
 import {calculateHit} from "./calculateHit.ts";
 import {useHitsStore} from "./Stores/hitsStore.tsx";
+import {useAnimationStore} from "./Stores/animationStore.tsx";
 
-const KeyHandler = (setShadow, setJump) => {
+const KeyHandler = () => {
     let cancel = false;
     
     const {visibleHits} = useHitsStore.getState();
+    const {enableJump, enableShadow, toggleJumpRight} = useAnimationStore.getState();
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'k') {
             if(!cancel) {
-                setJump(true)
                 calculateHit();
-                setShadow(true);
+                enableShadow();
+                enableJump();
+                toggleJumpRight();
                 cancel = true;
             }
         }
