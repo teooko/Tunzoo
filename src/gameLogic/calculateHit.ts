@@ -1,17 +1,18 @@
 ﻿import * as Tone from "tone";
 import {useScoringStore} from "./Stores/scoringStore.tsx";
 import {useHitsStore} from "./Stores/hitsStore.tsx";
+import {HitQuality} from "../../lib/types.ts";
 
 const getHitDetails = (timingOffset: number | null): { hitQualityType: string; baseScore: number } => {
     if(timingOffset === null)
-        return { hitQualityType: "miss", baseScore: 0 };
+        return { hitQualityType: HitQuality.Miss, baseScore: 0 };
     
     if (timingOffset < 0.05) {
-        return { hitQualityType: "perfect", baseScore: 300 };
+        return { hitQualityType: HitQuality.Perfect, baseScore: 300 };
     } else if (timingOffset < 0.1) {
-        return { hitQualityType: "good", baseScore: 100 };
+        return { hitQualityType: HitQuality.Good, baseScore: 100 };
     }
-    return { hitQualityType: "miss", baseScore: 0 };
+    return { hitQualityType: HitQuality.Miss, baseScore: 0 };
 };
 
 const scheduleSound = (time: number, sound: Tone.Player) => {

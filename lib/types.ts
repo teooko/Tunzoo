@@ -16,3 +16,9 @@ export type Hit = {
     time: number;
     sound: Tone.Player;
 }
+
+export enum HitQuality {
+    Perfect = "perfect",
+    Good = "good",
+    Miss = "miss"
+}

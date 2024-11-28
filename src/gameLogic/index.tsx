@@ -7,6 +7,7 @@ import {startSong} from "./startSong.ts";
 import {useScoringStore} from "./Stores/scoringStore.tsx";
 import { motion } from "framer-motion";
 import {useAnimationStore} from "./Stores/animationStore.tsx";
+import {HitQuality} from "../../lib/types.ts";
 
 const Index = () => {
     const audioRef = useRef<Tone.Player | null>(null);
@@ -19,9 +20,9 @@ const Index = () => {
             setTimeout(() => disableShadow(), 100);
     }, [shadow])
     const addShadow = (hitQuality) => {
-        if(shadow && hitQuality === "perfect") 
+        if(shadow && hitQuality === HitQuality.Perfect) 
             return "0px 0px 50px 10px #50DD49";
-        else if(shadow && hitQuality === "good")
+        else if(shadow && hitQuality === HitQuality.Good)
             return "0px 0px 50px 10px #DBCA11";
         return "0px 0px 5px #6D38E0";
     }

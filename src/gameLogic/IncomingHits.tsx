@@ -2,6 +2,7 @@
 import {useHitsStore} from "./Stores/hitsStore.tsx";
 import {useScoringStore} from "./Stores/scoringStore.tsx";
 import HitCircle from "./HitCircle.tsx";
+import {HitQuality} from "../../lib/types.ts";
 
 const IncomingHits = () => {
     const { removeVisibleHit } = useHitsStore((state) => state);
@@ -10,7 +11,7 @@ const IncomingHits = () => {
 
     const handleHitEndReached = (hit: number) => {
         resetCombo();
-        updateHitQuality("miss");
+        updateHitQuality(HitQuality.Miss);
         removeVisibleHit(hit);
     };
 
