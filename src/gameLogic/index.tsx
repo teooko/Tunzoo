@@ -16,7 +16,7 @@ const Index = () => {
     
     useEffect(() => {
         if(shadow)
-            setTimeout(() => disableShadow, 100);
+            setTimeout(() => disableShadow(), 100);
     }, [shadow])
     const addShadow = (hitQuality) => {
         if(shadow && hitQuality === "perfect") 
@@ -29,7 +29,7 @@ const Index = () => {
         if(jump)
             setTimeout(() => {
                 toggleJumpRight();
-                disableJump()
+                disableJump();
             }, 500);
     }, [jump])
     

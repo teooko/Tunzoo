@@ -7,14 +7,13 @@ const KeyHandler = () => {
     let cancel = false;
     
     const {visibleHits} = useHitsStore.getState();
-    const {enableJump, enableShadow, toggleJumpRight} = useAnimationStore.getState();
+    const {enableJump, enableShadow} = useAnimationStore.getState();
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'k') {
             if(!cancel) {
                 calculateHit();
                 enableShadow();
                 enableJump();
-                toggleJumpRight();
                 cancel = true;
             }
         }
