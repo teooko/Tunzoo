@@ -7,12 +7,12 @@ import {startSong} from "./startSong.ts";
 import {useScoringStore} from "./Stores/scoringStore.tsx";
 import { motion } from "framer-motion";
 
-
 const Index = () => {
     const audioRef = useRef<Tone.Player | null>(null);
     const [shadow, setShadow] = useState(true);
     const {hitQuality, score, combo} = useScoringStore(state => state);
     const [jump, setJump] = useState(false);
+    const [coord, setCoord] = useState(80);
     
     useEffect(() => {
         if(shadow)
@@ -27,15 +27,18 @@ const Index = () => {
     }
     useEffect(() => {
         if(jump)
-            setTimeout(() => setJump(false), 500);
+            setTimeout(() => {
+                setJump(false)
+                setCoord(state => -state);
+            }, 500);
     }, [jump])
     
     KeyHandler(setShadow, setJump);
     LoadMap(audioRef);
-    const getRandomValue = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+   
     return (
         <div>
-            <button onClick={() => startSong(audioRef)}>start</button>
+            <button onClick={() => startSong(audioRef)} style={{zIndex: -1}}>start</button>
             <motion.div style={{fontSize: 30,
                 borderRadius: "100px", 
                 marginLeft: "160px", 
@@ -44,8 +47,8 @@ const Index = () => {
                 position: "absolute", 
                 backgroundColor: "white"}} animate={{ boxShadow: addShadow(hitQuality)}}
                         transition={{ duration: 0.5 }}>
-                {jump && <motion.div style={{position: "absolute", zIndex: -1, textShadow: "0 0 15px #7849E0", color: "white"}}
-                             animate={{left: 100, top: 100, opacity: [100, 100, 100, 0]}}
+                {jump && <motion.div style={{top: 20, left: 20, position: "absolute", zIndex: -1, textShadow: "0 0 15px #7849E0", color: "white", fontFamily: 'Nunito', fontWeight: "bold", fontSize: 40}}
+                             animate={{left: coord, top: 80, opacity: [100, 100, 100, 0]}}
                              transition={{duration: 0.5, type: "keyframes"}}>{hitQuality}</motion.div>
                 }
             </motion.div>
@@ -53,8 +56,8 @@ const Index = () => {
             <div style={{display: "flex", flexDirection: "row"}}>
               <IncomingHits />
             </div>
-            <div>Score: {score}</div>
-            <div>Combo: {combo}</div>
+            <div style={{zIndex: -1}}>Score: {score}</div>
+            <div style={{zIndex: -1}}>Combo: {combo}</div>
         </div>
     );
 };
