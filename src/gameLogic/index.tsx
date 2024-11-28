@@ -10,9 +10,10 @@ import { motion } from "framer-motion";
 const Index = () => {
     const audioRef = useRef<Tone.Player | null>(null);
     const [shadow, setShadow] = useState(true);
-    const {hitQuality, score, combo} = useScoringStore(state => state);
     const [jump, setJump] = useState(false);
-    const [coord, setCoord] = useState(80);
+    const [coord, setCoord] = useState(true);
+
+    const {hitQuality, score, combo} = useScoringStore(state => state);
     
     useEffect(() => {
         if(shadow)
@@ -29,7 +30,7 @@ const Index = () => {
         if(jump)
             setTimeout(() => {
                 setJump(false)
-                setCoord(state => -state);
+                setCoord(state => !state);
             }, 500);
     }, [jump])
     
@@ -47,8 +48,8 @@ const Index = () => {
                 position: "absolute", 
                 backgroundColor: "white"}} animate={{ boxShadow: addShadow(hitQuality)}}
                         transition={{ duration: 0.5 }}>
-                {jump && <motion.div style={{top: 20, left: 20, position: "absolute", zIndex: -1, textShadow: "0 0 15px #7849E0", color: "white", fontFamily: 'Nunito', fontWeight: "bold", fontSize: 40}}
-                             animate={{left: coord, top: 80, opacity: [100, 100, 100, 0]}}
+                {jump && <motion.div style={{top: 20, left: 10, position: "absolute", zIndex: -1, textShadow: "0 0 15px #7849E0", color: "white", fontFamily: 'Nunito', fontWeight: "bold", fontSize: 40}}
+                             animate={{left: coord ? 80 : -80, top: 80, opacity: [100, 100, 100, 0]}}
                              transition={{duration: 0.5, type: "keyframes"}}>{hitQuality}</motion.div>
                 }
             </motion.div>
