@@ -33,6 +33,7 @@ export const calculateHit = () => {
         scheduleSound(now, hitMap[0].sound);
         const timingOffset = Math.abs(now - matchedHit - 0.15);
         const { hitQualityType, baseScore } = getHitDetails(timingOffset);
+        
         if(hitQuality !== hitQualityType)
             enableJump();
         
@@ -42,6 +43,8 @@ export const calculateHit = () => {
         incrementCombo();
     } else {
         const { hitQualityType } = getHitDetails(null);
+        if(hitQuality !== hitQualityType)
+            enableJump();
         updateHitQuality(hitQualityType);
         resetCombo();
     }

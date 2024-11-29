@@ -8,6 +8,7 @@ import {useScoringStore} from "./Stores/scoringStore.tsx";
 import { motion } from "framer-motion";
 import {useAnimationStore} from "./Stores/animationStore.tsx";
 import {HitQuality} from "../../lib/types.ts";
+import HitQualityAnimation from "./HitQualityAnimation.tsx";
 
 const Index = () => {
     const audioRef = useRef<Tone.Player | null>(null);
@@ -48,10 +49,7 @@ const Index = () => {
                 position: "absolute", 
                 backgroundColor: "white"}} animate={{ boxShadow: addShadow(hitQuality)}}
                         transition={{ duration: 0.5 }}>
-                {jump && <motion.div style={{top: 20, left: 10, position: "absolute", zIndex: -1, textShadow: "0 0 15px #7849E0", color: "white", fontFamily: 'Nunito', fontWeight: "bold", fontSize: 40}}
-                             animate={{left: jumpRight ? 80 : -80, top: 80, opacity: [100, 100, 100, 0]}}
-                             transition={{duration: 0.5, type: "keyframes"}}>{hitQuality}</motion.div>
-                }
+                <HitQualityAnimation />
             </motion.div>
             
             <div style={{display: "flex", flexDirection: "row"}}>
