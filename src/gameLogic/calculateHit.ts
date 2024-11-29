@@ -3,6 +3,7 @@ import {useScoringStore} from "./Stores/scoringStore.tsx";
 import {useHitsStore} from "./Stores/hitsStore.tsx";
 import {HitQuality} from "../../lib/types.ts";
 import {useAnimationStore} from "./Stores/animationStore.tsx";
+import {TIMING_TWEAKS} from "../../lib/constants.ts";
 
 const getHitDetails = (timingOffset: number | null): { hitQualityType: string; baseScore: number } => {
     if(timingOffset === null)
@@ -20,18 +21,17 @@ const scheduleSound = (time: number, sound: Tone.Player) => {
     sound.start(time);
 }
 
-// set the hardcoded time tweaking values to constants
 export const calculateHit = () => {
     const {incrementCombo, resetCombo, increaseScore, updateHitQuality, hitQuality} = useScoringStore.getState();
     const {hitMap, visibleHits, removeVisibleHit} = useHitsStore.getState();
     const {enableJump} = useAnimationStore.getState();
     
     const now = Tone.now();
-    const matchedHit = visibleHits.find(hit => Math.abs(now - hit - 0.15) < 0.1);
+    const matchedHit = visibleHits.find(hit => Math.abs(now - hit - TIMING_TWEAKS.HIT_OFFSET) < 0.1);
     
     if(matchedHit) {
         scheduleSound(now, hitMap[0].sound);
-        const timingOffset = Math.abs(now - matchedHit - 0.15);
+        const timingOffset = Math.abs(now - matchedHit - TIMING_TWEAKS.HIT_OFFSET);
         const { hitQualityType, baseScore } = getHitDetails(timingOffset);
         
         if(hitQuality !== hitQualityType)

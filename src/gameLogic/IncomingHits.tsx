@@ -4,6 +4,7 @@ import {useScoringStore} from "./Stores/scoringStore.tsx";
 import HitCircle from "./HitCircle.tsx";
 import {HitQuality} from "../../lib/types.ts";
 import {useAnimationStore} from "./Stores/animationStore.tsx";
+import {TIMING_TWEAKS} from "../../lib/constants.ts";
 
 const IncomingHits = () => {
     const { removeVisibleHit } = useHitsStore((state) => state);
@@ -25,7 +26,7 @@ const IncomingHits = () => {
                     className="falling-key"
                     initial={{ x: 1100 }}
                     animate={{ x: 100 }}
-                    transition={{ duration: 1.1 }}
+                    transition={{ duration: TIMING_TWEAKS.TRANSITION_DURATION }}
                     onAnimationComplete={() => handleHitEndReached(hit)}
                 >
                     <HitCircle />

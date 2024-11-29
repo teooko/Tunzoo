@@ -12,7 +12,7 @@ import HitQualityAnimation from "./HitQualityAnimation.tsx";
 
 const Index = () => {
     const audioRef = useRef<Tone.Player | null>(null);
-    const {shadow, jump, jumpRight, disableShadow, disableJump, toggleJumpRight } = useAnimationStore((state) => state);
+    const {shadow, jump, disableShadow, disableJump, toggleJumpRight } = useAnimationStore((state) => state);
 
     const {hitQuality, score, combo} = useScoringStore(state => state);
     

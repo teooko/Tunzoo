@@ -1,4 +1,5 @@
-﻿// lib/constants.ts
-export const TIMING_TWEAKS = {
-// make the constants
+﻿export const TIMING_TWEAKS = {
+    TRANSITION_DURATION: 1.1,
+    HITMAP_OFFSET: 0.9,
+    HIT_OFFSET: 0.15
 };

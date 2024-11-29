@@ -1,5 +1,6 @@
 ﻿import * as Tone from "tone";
 import {useHitsStore} from "./Stores/hitsStore.tsx";
+import {TIMING_TWEAKS} from "../../lib/constants.ts";
 
 export const startSong = (audioRef) => {
     const {hitMap} = useHitsStore.getState();
@@ -11,7 +12,7 @@ export const startSong = (audioRef) => {
         hitMap.forEach((hit) => {
             transport.scheduleOnce(() => {
                 addVisibleHit(hit);
-            }, hit.time - 0.9);
+            }, hit.time - TIMING_TWEAKS.HITMAP_OFFSET);
         });
 
         transport.start();
