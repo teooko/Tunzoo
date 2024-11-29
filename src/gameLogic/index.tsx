@@ -5,30 +5,11 @@ import LoadMap from "./LoadMap.tsx";
 import IncomingHits from "./IncomingHits.tsx";
 import {startSong} from "./startSong.ts";
 import {useScoringStore} from "./Stores/scoringStore.tsx";
-import { motion } from "framer-motion";
-import {useAnimationStore} from "./Stores/animationStore.tsx";
-import {HitQuality} from "../../lib/types.ts";
-import HitQualityAnimation from "./HitQualityAnimation.tsx";
 import HitReference from "./HitReference.tsx";
 
 const Index = () => {
     const audioRef = useRef<Tone.Player | null>(null);
-    const {shadow, jump, disableShadow, disableJump, toggleJumpRight } = useAnimationStore((state) => state);
-
-    const {hitQuality, score, combo} = useScoringStore(state => state);
-    
-    useEffect(() => {
-        if(shadow)
-            setTimeout(() => disableShadow(), 100);
-    }, [shadow])
-    
-    useEffect(() => {
-        if(jump)
-            setTimeout(() => {
-                toggleJumpRight();
-                disableJump();
-            }, 500);
-    }, [jump])
+    const {score, combo} = useScoringStore(state => state);
     
     KeyHandler();
     LoadMap(audioRef);
@@ -37,7 +18,6 @@ const Index = () => {
         <div>
             <button onClick={() => startSong(audioRef)} style={{zIndex: -1}}>start</button>
             <HitReference />
-            
             <div style={{display: "flex", flexDirection: "row"}}>
               <IncomingHits />
             </div>

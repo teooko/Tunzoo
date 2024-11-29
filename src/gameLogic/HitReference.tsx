@@ -1,13 +1,15 @@
-﻿import React from 'react';
-import HitQualityAnimation from "./HitQualityAnimation.tsx";
+﻿import HitQualityAnimation from "./HitQualityAnimation.tsx";
 import {motion} from "framer-motion";
 import {HitQuality} from "../../lib/types.ts";
 import {useAnimationStore} from "./Stores/animationStore.tsx";
 import {useScoringStore} from "./Stores/scoringStore.tsx";
+import {useHitQualityAnimations} from "./useHitQualityAnimations.tsx";
 
 const HitReference = () => {
-    const {shadow, jump, disableShadow, disableJump, toggleJumpRight } = useAnimationStore((state) => state);
-    const {hitQuality, score, combo} = useScoringStore(state => state);
+    const {shadow} = useAnimationStore((state) => state);
+    const {hitQuality} = useScoringStore(state => state);
+
+    useHitQualityAnimations();
     const addShadow = (hitQuality) => {
         if(shadow && hitQuality === HitQuality.Perfect)
             return "0px 0px 50px 10px #50DD49";
