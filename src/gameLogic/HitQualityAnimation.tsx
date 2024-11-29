@@ -16,16 +16,10 @@ const HitQualityAnimation = () => {
         <>
             {jump && (
                 <motion.div
+                    className="absolute top-[20px] left-[10px] z-[-1] text-white font-bold text-4xl"
                     style={{
-                        top: 20,
-                        left: 10,
-                        position: "absolute",
-                        zIndex: -1,
                         textShadow: "0 0 15px #7849E0",
-                        color: "white",
                         fontFamily: "Nunito",
-                        fontWeight: "bold",
-                        fontSize: 40,
                     }}
                     animate={{
                         left: jumpRight ? 80 : -80,
