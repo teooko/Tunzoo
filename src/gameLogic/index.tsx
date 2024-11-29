@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import {useAnimationStore} from "./Stores/animationStore.tsx";
 import {HitQuality} from "../../lib/types.ts";
 import HitQualityAnimation from "./HitQualityAnimation.tsx";
+import HitReference from "./HitReference.tsx";
 
 const Index = () => {
     const audioRef = useRef<Tone.Player | null>(null);
@@ -20,13 +21,7 @@ const Index = () => {
         if(shadow)
             setTimeout(() => disableShadow(), 100);
     }, [shadow])
-    const addShadow = (hitQuality) => {
-        if(shadow && hitQuality === HitQuality.Perfect) 
-            return "0px 0px 50px 10px #50DD49";
-        else if(shadow && hitQuality === HitQuality.Good)
-            return "0px 0px 50px 10px #DBCA11";
-        return "0px 0px 5px #6D38E0";
-    }
+    
     useEffect(() => {
         if(jump)
             setTimeout(() => {
@@ -41,16 +36,7 @@ const Index = () => {
     return (
         <div>
             <button onClick={() => startSong(audioRef)} style={{zIndex: -1}}>start</button>
-            <motion.div style={{fontSize: 30,
-                borderRadius: "100px", 
-                marginLeft: "160px", 
-                width: "80px", 
-                height: "80px", 
-                position: "absolute", 
-                backgroundColor: "white"}} animate={{ boxShadow: addShadow(hitQuality)}}
-                        transition={{ duration: 0.5 }}>
-                <HitQualityAnimation />
-            </motion.div>
+            <HitReference />
             
             <div style={{display: "flex", flexDirection: "row"}}>
               <IncomingHits />
