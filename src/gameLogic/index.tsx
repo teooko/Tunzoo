@@ -2,10 +2,9 @@
 import * as Tone from "tone";
 import KeyHandler from "./KeyHandler.tsx";
 import LoadMap from "./LoadMap.tsx";
-import IncomingHits from "./IncomingHits.tsx";
 import {startSong} from "./startSong.ts";
 import {useScoringStore} from "./Stores/scoringStore.tsx";
-import HitReference from "./HitReference.tsx";
+import GameInterface from "./GameInterface.tsx";
 
 const Index = () => {
     const audioRef = useRef<Tone.Player | null>(null);
@@ -17,10 +16,7 @@ const Index = () => {
     return (
         <div>
             <button onClick={() => startSong(audioRef)} style={{zIndex: -1}}>start</button>
-            <HitReference />
-            <div style={{display: "flex", flexDirection: "row"}}>
-              <IncomingHits />
-            </div>
+            <GameInterface />
             <div style={{zIndex: -1}}>Score: {score}</div>
             <div style={{zIndex: -1}}>Combo: {combo}</div>
         </div>
