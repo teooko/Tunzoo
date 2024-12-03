@@ -1,5 +1,4 @@
 ﻿import Button from "./Button.tsx";
-import {Link} from "react-router";
 
 const OverlayMenu = () => {
     return (
@@ -8,10 +7,8 @@ const OverlayMenu = () => {
 
             <div className="flex flex-col items-center justify-center h-full space-y-4">
                 <img src={"public/assets/tunzooLogo.png"} width={400} height={400} />
-                    <Link to={"/solo"} >
-                        <Button label={"Play Solo"} />
-                    </Link>
-                <Button label={"Create Lobby"} />
+                <Button label={"Play Solo"} linkTo={"/solo"}/>
+                <Button label={"Create Lobby"} linkTo={"/solo"}/>
             </div>
         </div>
     );

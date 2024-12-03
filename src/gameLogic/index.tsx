@@ -1,4 +1,4 @@
-﻿import {useEffect, useRef, useState} from "react";
+﻿import {useRef} from "react";
 import * as Tone from "tone";
 import KeyHandler from "./KeyHandler.tsx";
 import LoadMap from "./LoadMap.tsx";
