@@ -1,7 +1,7 @@
 ﻿import React, { useEffect } from "react";
 import * as signalR from "@microsoft/signalr";
 
-const SignalRComponent = () => {
+const SignalRComponent = (lobbyId) => {
     useEffect(() => {
         const connection = new signalR.HubConnectionBuilder()
             .withUrl("ws://localhost:5192/hubs/lobby", {
@@ -25,7 +25,15 @@ const SignalRComponent = () => {
             await start();
         });
 
-        start();
+        start().then(async () => {
+            try {
+                await connection.send("JoinLobby", lobbyId);
+                console.log("lobby joined");
+            }
+            catch (e) {
+                console.log(e);
+            }
+        });
 
         return () => {
             connection.stop();
