@@ -1,10 +1,11 @@
 ﻿import React, { useEffect } from "react";
 import * as signalR from "@microsoft/signalr";
+import {URLS} from "../../lib/constants.ts";
 
-const SignalRComponent = (lobbyId) => {
+const SignalRComponent = (lobbyId: string) => {
     useEffect(() => {
         const connection = new signalR.HubConnectionBuilder()
-            .withUrl("ws://localhost:5192/hubs/lobby", {
+            .withUrl(`${URLS.WS_URL}/hubs/lobby`, {
                 skipNegotiation: true,
                 transport: signalR.HttpTransportType.WebSockets,
             })
