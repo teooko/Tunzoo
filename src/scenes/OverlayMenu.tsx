@@ -8,7 +8,7 @@ const OverlayMenu = () => {
             <div className="flex flex-col items-center justify-center h-full space-y-4">
                 <img src={"public/assets/tunzooLogo.png"} width={400} height={400} />
                 <Button label={"Play Solo"} linkTo={"/solo"}/>
-                <Button label={"Create Lobby"} linkTo={"/solo"}/>
+                <Button label={"Create Lobby"} linkTo={"/lobby/createLobby"}/>
             </div>
         </div>
     );
