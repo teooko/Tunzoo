@@ -5,5 +5,6 @@
 };
 
 export const URLS = {
-    WS_URL: "ws://localhost:5192"
+    WS_URL: "ws://localhost:5192",
+    API_URL: "http://localhost:5192"
 }
